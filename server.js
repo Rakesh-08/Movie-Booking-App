@@ -30,7 +30,7 @@ expressApp.use(bodyParser.urlencoded({ extended: true }));
 // import routes
 
 require("./routes/movieRoutes")(expressApp);
-require("./routes/theatreRooutes")(expressApp);
+require("./routes/theatreRoutes")(expressApp);
 
 
 expressApp.listen(serverConfig.PORT, () => {
