@@ -16,7 +16,8 @@ db.once("open", () => {
      console.log("connected to mongodb")
 })
 
-
+// import admin creation function
+let {createAdmin }= require("./controllers/authController")
 
 // express setup ;
 let express = require("express");
@@ -31,9 +32,12 @@ expressApp.use(bodyParser.urlencoded({ extended: true }));
 
 require("./routes/movieRoutes")(expressApp);
 require("./routes/theatreRoutes")(expressApp);
+require("./routes/userRoutes")(expressApp);
+require("./routes/authRoutes")(expressApp)
 
 
 expressApp.listen(serverConfig.PORT, () => {
-     console.log(`you server is listening at port ${serverConfig.PORT}`)
+     console.log(`you server is listening at port ${serverConfig.PORT}`);
+     createAdmin();
 }
 )
