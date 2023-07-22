@@ -1,7 +1,8 @@
 let jwt = require("jsonwebtoken");
 const { secretKey } = require("../configs/authConfig");
 let userModel = require("../models/userModel");
-let constants= require("../utils/constants")
+let constants= require("../utils/constants");
+const bookingModel = require("../models/bookingModel");
 
 module.exports.verifyToken =async (req, res, next) => {
     
@@ -31,7 +32,7 @@ module.exports.verifyToken =async (req, res, next) => {
 
 }
 
-module.exports.validAuthorisation = async (req, res, next) => {
+module.exports.validAuthorisationToUserRoutes = async (req, res, next) => {
     
     try {
 
@@ -58,4 +59,65 @@ module.exports.validAuthorisation = async (req, res, next) => {
             message:"some internal server error occurred"
         })
              }
+}
+
+module.exports.authValidatorForBooking = async (req, res, next) => {
+
+    try {
+
+        let requester = await userModel.findOne({
+            userId: req.userId
+        })
+
+        let booking = await bookingModel.findOne({
+            _id:req.params.bookingId
+        })
+
+        if (!booking) {
+            return res.status(400).send({
+                message:"no booking exist for this given booking id"
+            })
+        }
+
+        let isAdmin = null;
+
+        if (requester.userType == constants.userType.admin && requester.userStatus == constants.userStatus.approved) {
+            isAdmin = requester;
+        }
+
+        if (!(isAdmin || requester._id == booking.customerId)) {
+            return res.status(401).send({
+                message: "unauthorised request! you are not allowed to make request to this route"
+            })
+        }
+        next();
+
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send({
+            message: "some internal server error occurred"
+        })
+    }
+}
+
+module.exports.IsAdmin = async (req, res, next) => {
+    try {
+        let requester = await userModel.findOne({
+            userId: req.userId
+        }) 
+
+        if (!(requester.userType == constants.userType.admin && requester.userStatus == constants.userStatus.approved)) {
+            return res.status(401).send({
+                message: "unauthorised request! you are not allowed to make request to this route"
+            })
+        }
+
+        next();
+        
+    } catch (err) {
+        console.log(err)
+        res.status(500).send({
+            message:"some internal server error occurred"
+        })
+    }
 }

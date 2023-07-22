@@ -34,6 +34,8 @@ require("./routes/movieRoutes")(expressApp);
 require("./routes/theatreRoutes")(expressApp);
 require("./routes/userRoutes")(expressApp);
 require("./routes/authRoutes")(expressApp)
+require("./routes/bookingRoutes")(expressApp);
+require("./routes/paymentRoutes")(expressApp);
 
 
 expressApp.listen(serverConfig.PORT, () => {

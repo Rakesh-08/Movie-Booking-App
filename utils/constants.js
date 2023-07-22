@@ -1,6 +1,6 @@
 module.exports = {
     
-    ReleaseStatus: {
+  ReleaseStatus: {
         released: "RELEASED",
         blocked: "BLOCKED",
         comingSoon:"COMING SOON"
@@ -13,5 +13,16 @@ module.exports = {
   userType: {
     customer: "CUSTOMER",
     admin:"ADMIN"
+  },
+  bookingStatus: {
+    inProgress:"IN_PROGRESS",
+    completed: "COMPLETED",
+    cancelled:"CANCELLED"
+    
+  },
+  paymentStatus: {
+    notPaid: "NOT_PAID",
+    pending: "PENDING",
+    paid:"PAID"
   }
 }
