@@ -1,10 +1,31 @@
 let userModel = require("../models/userModel");
+const constants = require("../utils/constants");
 let secureUserResponse = require("../utils/secureUserResponse");
 
 let updateUser = async (req, res) => {
 
     try {
         let updatePassed = req.body;
+
+        if (Object.keys(updatePassed).includes("userStatus")) {
+
+
+            if (!Object.values(constants.userStatus).includes(updatePassed.userStatus)) {
+                return res.status(400).send({
+                    message:"invalid user status passed"
+                })
+            }
+            
+            let requestMaker = await userModel.findOne({
+                userId: req.userId
+            })
+
+            if (requestMaker.userType !== 'ADMIN') {
+                return res.status(401).send({
+                    message:"unauthorised request , you are not allowed to change the status of the user"
+                })
+            }
+        }
      
 
         let updatedUser = await userModel.findOneAndUpdate({

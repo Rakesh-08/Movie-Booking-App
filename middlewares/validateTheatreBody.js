@@ -28,7 +28,14 @@ module.exports = async (req, res, next) => {
             message: "please pass the pincode of the city"
         })
     }
+   
+    // validate base price for the theatre
 
+    if (!req.body.basePrice) {
+        return res.status(400).send({
+            message:"please mention the base price for this theatre"
+        })
+    }
 
     next();
 }

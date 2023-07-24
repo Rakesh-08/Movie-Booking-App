@@ -30,6 +30,14 @@ let validateMovieBody = async (req, res, next) => {
         })
     }
 
+    // validate the minimum price for movie
+
+    if (!req.body.price) {
+        return res.status(400).send({
+            message:"please mention the screen price for the movie"
+        })
+    }
+
     // validate movie release status
     if (!req.body.releaseStatus) {
         return res.status(400).send({

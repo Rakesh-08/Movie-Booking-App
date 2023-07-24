@@ -17,6 +17,13 @@ let bookingSchema = new mongoose.Schema({
         ref: "movies",
         required:true
     },
+    NoOfTickets: {
+        type: Number,
+        required:true
+    },
+    pricePerTicket: {
+        type: Number  
+    },
     status: {
         type: String,
         default:"IN_PROGRESS"

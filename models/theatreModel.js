@@ -23,6 +23,10 @@ let theatreSchema = new mongoose.Schema({
         type: [mongoose.SchemaTypes.ObjectId],
         ref:"movies"
     },
+    basePrice: {
+        type: Number,
+        required:true
+    },
     createdAt: {
         type: Date,
         immutable: true,

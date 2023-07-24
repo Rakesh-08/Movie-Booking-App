@@ -1,3 +1,4 @@
+const bookingModel = require("../models/bookingModel")
 
 
 module.exports = async (req, res, next) => {
@@ -10,11 +11,6 @@ module.exports = async (req, res, next) => {
         })
     }
 
-    // validate amount of the payment
-    if (!req.body.amount) {
-        return res.status(400).send({
-            message:"please mention the amount of payment"
-        })
-    }
-    
+
+    next()
 }

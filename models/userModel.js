@@ -33,7 +33,6 @@ let userSchema = new mongoose.Schema({
     },
     userStatus: {
         type: String,
-        required: true,
         default:"PENDING"
     },
     createdAt: {

@@ -1,4 +1,6 @@
 let bookingModel = require("../models/bookingModel");
+const movieModel = require("../models/movieModel");
+const theatreModel = require("../models/theatreModel");
 let userModel = require("../models/userModel");
 let constants = require("../utils/constants");
 
@@ -6,21 +8,34 @@ let constants = require("../utils/constants");
 let createBooking = async (req, res) => {
     try {
 
-        let { customerId, movieId, theatreId } = req.body;
+        let { customerId, movieId, theatreId,NoOfTickets } = req.body;
 
         if (!customerId) {
             let user = await userModel.findOne({
                   userId:req.userId
             }).select({ _id: 1 })
             
-            customerId = user._id;
-            
+            customerId = user._id;    
         }
+
+        let moviePrice = await movieModel.findOne({
+            _id: movieId
+        }).select({ _id: 0, price: 1 });
+
+
+        let theatrePrice = await theatreModel.findOne({
+            _id: theatreId
+        }).select({ _id: 0, basePrice: 1 });
+
+        let finalPricePerTicket= theatrePrice.basePrice + moviePrice.price
+
 
         let booking = await bookingModel.create({
             customerId: customerId,
             theatreId: theatreId,
-            movieId:movieId
+            movieId: movieId,
+            NoOfTickets: NoOfTickets,
+            pricePerTicket:finalPricePerTicket
         })
 
        
@@ -47,6 +62,13 @@ let updateBooking = async (req, res) => {
         if (!booking) {
             return res.status(400).send({
                 message:"Invalid booking id! no booking exist"
+            })
+        }
+
+
+        if (!Object.values(constants.bookingStatus).includes(updatePassed.bookingStatus)) {
+            return res.status(400).send({
+                message:"please pass valid booking status to update booking status"
             })
         }
 

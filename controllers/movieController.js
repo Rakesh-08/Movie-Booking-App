@@ -1,11 +1,9 @@
 let movieModel= require("../models/movieModel")
-
+let constants = require("../utils/constants");
 
 let createMovie = async (req, res) => {
 
     try {
-        
-   
     let obj = req.body;
 
         let movie = await movieModel.create(obj)
@@ -23,6 +21,16 @@ let updateMovie = async (req, res) => {
     try {
 
         let update = req.body;
+
+        if (update.releaseStatus) {
+
+            if (!Object.values(constants.ReleaseStatus).includes(update.releaseStatus)) {
+                return res.status(400).send({
+                    message:"please pass valid release status for the movie"
+                })
+            }
+            
+        }
 
         let updatedMovie = await movieModel.findOneAndUpdate({
               _id:req.params.movieId

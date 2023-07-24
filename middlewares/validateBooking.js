@@ -34,27 +34,56 @@ module.exports = async (req, res, next) => {
     
 
     // validate the theatreId
+
+    if (!theatreId) {
+        return res.status(400).send({
+            message: "please pass the theatre id"
+        })
+    }
+
     let theatre = await theatreModel.findOne({
         _id: theatreId
     })
 
-    if (theatreId&&!theatre) {
+
+    if (!theatre) {
         return res.status(400).send({
             message: "Invalid Theatre id ! no theatre exist with this id"
         })
     }
 
     // validate the movie id
+
+    if (!movieId) {
+        return res.status(400).send({
+            message: "please pass the movie id"
+        })
+    }
+
+    if (!theatre.movies.includes(movieId)) {
+        return res.status(400).send({
+            message:"Movie you want to see is not scheduled in this theatre, try with some other movie"
+        })
+    }
+
     let movie = await movieModel.findOne({
         _id: movieId
     })
 
-    if (movieId &&!movie) {
+    if (!movie) {
         return res.status(400).send({
             message: "Invalid movie id ! no movie exist with this id"
         })
     }
+  
 
+    // validate the no. of tickets need to be booked
+
+    if (!req.body.NoOfTickets) {
+        return res.status(400).send({
+            message:"please mention how many tickets do you want to book"
+        })
+    }
     next();
 }
 
