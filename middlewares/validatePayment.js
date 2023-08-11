@@ -3,7 +3,7 @@ const bookingModel = require("../models/bookingModel")
 
 module.exports = async (req, res, next) => {
     
-    // payment model should have the booking id
+    // payment creation request should  have the booking id
 
     if (!req.body.bookingId) {
         return res.status(400).send({

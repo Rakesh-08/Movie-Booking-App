@@ -12,7 +12,7 @@ let createPayment = async (req, res, next) => {
         
         if (!booking) {
             return res.status(400).send({
-                message:"INvalid booking id , can't create payment for undefined booking "
+                message:"Invalid booking id , can't create payment for undefined booking "
             })
         }
 

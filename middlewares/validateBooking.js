@@ -84,6 +84,14 @@ module.exports = async (req, res, next) => {
             message:"please mention how many tickets do you want to book"
         })
     }
+
+    // validate the timing of the tickets
+
+    if (!req.body.Timing) {
+        return res.status(400).send({
+            message: "please book the timing slot of the movie"
+        })
+    }
     next();
 }
 

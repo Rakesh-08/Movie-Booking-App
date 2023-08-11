@@ -21,6 +21,10 @@ let bookingSchema = new mongoose.Schema({
         type: Number,
         required:true
     },
+    Timing: {
+        type: String,
+        required:true
+    },
     pricePerTicket: {
         type: Number  
     },
