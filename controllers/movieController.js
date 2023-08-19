@@ -1,4 +1,5 @@
-let movieModel= require("../models/movieModel")
+let movieModel= require("../models/movieModel");
+const theatreModel = require("../models/theatreModel");
 let constants = require("../utils/constants");
 
 let createMovie = async (req, res) => {
@@ -53,7 +54,6 @@ let updateMovie = async (req, res) => {
 
 }
 
-
 let getAllMovies = async (req, res) => {
     try {
 
@@ -84,7 +84,6 @@ let getAllMovies = async (req, res) => {
     }
 
 }
-
 
 let getMovieById = async (req, res) => {
     try {
@@ -123,6 +122,19 @@ let deleteMovie = async (req, res) => {
                 message:"invalid request ! no movie exist with given id"
             })
         }
+
+        // fetch all the theatres whose screening includes this movie
+
+        let theatres = await theatreModel.find({
+            movies:req.params.movieId
+        }).select({ movies: 1 })
+        
+        // remove this movie from the list of movies for the theatres
+        theatres.map(obj => {
+            obj.movies = obj.movies.filter(id => id !== req.params.movieId)
+        });
+
+        await theatres.save()
 
         let acknowledged= await movieModel.deleteOne({
               _id:req.params.movieId

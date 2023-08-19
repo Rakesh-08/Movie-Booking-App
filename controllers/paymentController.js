@@ -1,6 +1,8 @@
 let constants= require("../utils/constants")
 const bookingModel = require("../models/bookingModel");
 let paymentModel = require("../models/paymentModel");
+let sendEmail = require("../utils/notificationClient");
+
 
 let createPayment = async (req, res, next) => {
     try {
@@ -16,12 +18,36 @@ let createPayment = async (req, res, next) => {
             })
         }
 
+        let bookingTime = booking.createdAt;
+        let currentTime = Date.now();
+
+        let diff = Math.floor((currentTime - bookingTime) / 1000 * 60)
+        
+        if (diff > 5) {
+            booking.status = constants.bookingStatus.expired;
+            await booking.save();
+            return res.status(400).send({
+                message:"TimeOut ! can't make payment, please try again with new booking"
+            })
+        }
+
         let amount= (booking.NoOfTickets)*(booking.pricePerTicket)
 
         let payment = await paymentModel.create({
             bookingId: bookingId,
-            amount:amount
+            amount: amount,
+            paymentStatus:constants.paymentStatus.success
         })
+
+        booking.status = constants.bookingStatus.completed;
+        await booking.save();
+
+        let user = await userModel.findOne({
+              _id:booking.customerId,
+        })
+
+        sendEmail(payment._id,"payment successfull for booking Id:" + booking._id,JSON.stringify(booking),user.email,"mba-no-reply-@gmail.com")
+
 
         res.status(200).send(payment);
 

@@ -121,3 +121,26 @@ module.exports.IsAdmin = async (req, res, next) => {
         })
     }
 }
+
+
+module.exports.AdminOrClient = async (req, res, next) => {
+    try {
+        let requester = await userModel.findOne({
+            userId: req.userId
+        })
+
+    if (!(requester.userType == constants.userType.admin  || requester.userType == constants.userType.client)) {
+            return res.status(401).send({
+                message: "unauthorised request! you are not allowed to make request to this route"
+            })
+        }
+
+        next();
+
+    } catch (err) {
+        console.log(err)
+        res.status(500).send({
+            message: "some internal server error occurred"
+        })
+    }
+}

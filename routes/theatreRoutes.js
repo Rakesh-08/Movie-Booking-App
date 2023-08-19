@@ -9,14 +9,14 @@ let {
     removeMoviesFromTheatre
 } = require("../controllers/theatreController");
 let theatreBodyValidator = require("../middlewares/validateTheatreBody");
-const { verifyToken, IsAdmin } = require("../middlewares/authJwt")
+const { verifyToken, IsAdmin,AdminOrClient } = require("../middlewares/authJwt")
 
 
 module.exports = (app) => {
     
     app.post("/movieBooking/api/v1/theatres", [verifyToken, IsAdmin , theatreBodyValidator], createTheatre);
     
-    app.put("/movieBooking/api/v1/theatres/:theatreId", [verifyToken, IsAdmin ], updateTheatre);
+    app.put("/movieBooking/api/v1/theatres/:theatreId", [verifyToken, AdminOrClient], updateTheatre);
     
     app.get("/movieBooking/api/v1/theatres", verifyToken, getAllTheatres);
     
@@ -24,10 +24,10 @@ module.exports = (app) => {
     
     app.delete("/movieBooking/api/v1/theatres/:theatreId", [verifyToken, IsAdmin ], deleteTheatre);
     
-    app.put("/movieBooking/api/v1/theatres/:theatreId/movies", [verifyToken, IsAdmin ], addMoviesInTheatre);
+    app.put("/movieBooking/api/v1/theatres/:theatreId/movies", [verifyToken, AdminOrClient ], addMoviesInTheatre);
     
     app.get("/movieBooking/api/v1/theatres/:theatreId/movies", verifyToken, getAllMoviesInTheatre);
     
-    app.put("/movieBooking/api/v1/theatres/:theatreId/removeMovies", [verifyToken,IsAdmin ],removeMoviesFromTheatre)
+    app.put("/movieBooking/api/v1/theatres/:theatreId/removeMovies", [verifyToken,AdminOrClient ],removeMoviesFromTheatre)
 
 }

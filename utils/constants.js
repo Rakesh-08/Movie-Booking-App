@@ -12,17 +12,19 @@ module.exports = {
   },
   userType: {
     customer: "CUSTOMER",
+    client:"CLIENT",
     admin:"ADMIN"
   },
   bookingStatus: {
     inProgress:"IN_PROGRESS",
     completed: "COMPLETED",
-    cancelled:"CANCELLED"
+    cancelled: "CANCELLED",
+    expired: "EXPIRED"
     
   },
   paymentStatus: {
-    notPaid: "NOT_PAID",
+   success:"SUCCESS",
     pending: "PENDING",
-    paid:"PAID"
+    failed: "FAILED"
   }
 }

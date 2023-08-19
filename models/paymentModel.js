@@ -13,7 +13,7 @@ let paymentSchema = new mongoose.Schema({
     },
     paymentStatus: {
         type: String,
-        default:"NOT_PAID"
+        default:"PENDING"
     },
     createdAt: {
         type: Date,

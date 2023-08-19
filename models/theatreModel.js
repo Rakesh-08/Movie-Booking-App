@@ -27,6 +27,11 @@ let theatreSchema = new mongoose.Schema({
         type: Number,
         required:true
     },
+    ownerId: {
+        type: mongoose.SchemaTypes.ObjectId,
+        required: true,
+        ref:"users"
+    },
     createdAt: {
         type: Date,
         immutable: true,

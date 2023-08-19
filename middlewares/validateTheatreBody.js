@@ -37,5 +37,10 @@ module.exports = async (req, res, next) => {
         })
     }
 
+    if (!req.body.ownerId) {
+        return res.status(400).send({
+            message: "owner Id is missing for this theatre"
+        })
+    }
     next();
 }
