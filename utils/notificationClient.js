@@ -1,5 +1,4 @@
 let Client = require("node-rest-client").Client;
-
 let client = new Client();
 
 module.exports = (id, subject, content, emailIds, requester)=>{

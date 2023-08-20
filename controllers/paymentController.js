@@ -46,7 +46,7 @@ let createPayment = async (req, res, next) => {
               _id:booking.customerId,
         })
 
-        sendEmail(payment._id,"payment successfull for booking Id:" + booking._id,JSON.stringify(booking),user.email,"mba-no-reply-@gmail.com")
+        sendEmail(payment._id,"Payment successfull for booking Id:" + booking._id,JSON.stringify(booking),[user.email],"mba-no-reply-@gmail.com")
 
 
         res.status(200).send(payment);

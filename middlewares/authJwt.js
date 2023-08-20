@@ -3,6 +3,7 @@ const { secretKey } = require("../configs/authConfig");
 let userModel = require("../models/userModel");
 let constants= require("../utils/constants");
 const bookingModel = require("../models/bookingModel");
+const theatreModel = require("../models/theatreModel");
 
 module.exports.verifyToken =async (req, res, next) => {
     
@@ -128,14 +129,25 @@ module.exports.AdminOrClient = async (req, res, next) => {
         let requester = await userModel.findOne({
             userId: req.userId
         })
+        let theatre = await theatreModel.findOne({
+            _id:req.params.theatreId
+        }).select({ownerId:1})
 
-    if (!(requester.userType == constants.userType.admin  || requester.userType == constants.userType.client)) {
-            return res.status(401).send({
-                message: "unauthorised request! you are not allowed to make request to this route"
-            })
-        }
 
+    if (requester.userType == constants.userType.admin ) {
         next();
+        
+        }
+    else if (requester.userType == constants.userType.client && theatre.ownerId == requester._id) {
+        next();
+        
+    } else {
+        return res.status(401).send({
+            message: "unauthorised request! you are not allowed to make request to this route"
+        })
+        } 
+
+       
 
     } catch (err) {
         console.log(err)
