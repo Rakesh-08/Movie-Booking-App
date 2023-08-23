@@ -1,4 +1,8 @@
 
+// env configuration
+
+require("dotenv").config();
+
 // mongoose connection with mongodb;
 
 let mongoose = require("mongoose")
