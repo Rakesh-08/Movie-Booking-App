@@ -8,9 +8,9 @@ function App() {
   return (
     <BrowserRouter>
       
-      <Router>
+      <Routes>
           <Route path="/Login" element={<AuthComponent/>}></Route>
-      </Router>
+      </Routes>
     </BrowserRouter>
   )
 }

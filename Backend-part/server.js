@@ -28,9 +28,11 @@ let express = require("express");
 let bodyParser= require("body-parser");
 const serverConfig = require("./configs/serverConfig");
 let expressApp = express();
+let cors= require("cors");
 
 expressApp.use(bodyParser.json());
 expressApp.use(bodyParser.urlencoded({ extended: true }));
+expressApp.use(cors());
 
 // import routes
 

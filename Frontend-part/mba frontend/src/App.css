@@ -1,0 +1,13 @@
+.authToggle:hover{
+   cursor: pointer;
+   color:rgb(77, 77, 208);
+   text-decoration: underline;
+}
+
+.authBox{
+    min-width:18em;
+    min-height: fit-content
+}
+.authInput{
+    width:90%;
+}
