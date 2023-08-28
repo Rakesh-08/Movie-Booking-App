@@ -60,7 +60,9 @@ export default function AuthComponent() {
        
       signInCall(loginCredential)
         .then((response) => {
-          console.log(response)
+          localStorage.setItem("Name", response.data.name)
+          localStorage.setItem("userType", response.data.userType);
+          localStorage.setItem("mba_token", response.data.accessToken)
           NavigateTo("/")
         })
         .catch((err) => {
