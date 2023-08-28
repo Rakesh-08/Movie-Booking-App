@@ -70,13 +70,8 @@ let getAllMovies = async (req, res) => {
 
         let allMovies = await movieModel.find(query)
         
-        if (allMovies.length > 0) {
             res.status(200).send(allMovies)
-        } else {
-            res.status(400).send({
-                message:"no movies exist"
-            })
-        }
+        
 
     } catch (err) {
         console.log(err);

@@ -159,6 +159,7 @@ export default function AuthComponent() {
               <div className="form-floating authInput ">
                 <input
                   required
+                  id="password"
                   type={togglePassword}
                   className="form-control  "
                   placeholder="password"
@@ -167,7 +168,7 @@ export default function AuthComponent() {
                     setAuthInfo({ ...authInfo, password: e.target.value })
                   }
                 />{" "}
-                <label>Password</label>
+                <label htmlFor="password">Password</label>
               </div>
               <div>
                 <input

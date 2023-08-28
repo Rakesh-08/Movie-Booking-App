@@ -1,7 +1,23 @@
+body{
+    background-color: black;
+    color:white !important;
+}
+
 .authToggle:hover{
    cursor: pointer;
-   color:rgb(77, 77, 208);
-   text-decoration: underline;
+   color:rgb(27, 27, 211);
+  
+}
+.moviecard:hover{
+  cursor: pointer;
+  transform: scale(1.02);
+  opacity: 0.8;
+}
+
+.searchBar{
+    width: 49vw;
+    height:5vh;
+    border-radius:2em;
 }
 
 .authBox{

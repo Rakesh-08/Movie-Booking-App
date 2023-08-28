@@ -1,67 +1,53 @@
-export default function MoviesCrousal() {
+
+
+import Carousel from "react-bootstrap/Carousel";
+
+function MoviesCrousal() {
   return (
-    <div
-      id="carouselExampleControls"
-      className="carousel slide"
-      data-bs-ride="carousel"
-    >
-      <div className="carousel-inner">
-        <div className="carousel-item active">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Oppenheimer_%28film%29.jpg/220px-Oppenheimer_%28film%29.jpg"
-            className="d-block w-100"
-            alt="openheimer"
-          />
-        </div>
-        <div className="carousel-item">
-          <img
-            src="https://images.news18.com/ibnlive/uploads/2020/07/1604654831_ganpath-first-look.jpg?impolicy=website&width=0&height=0"
-            className="d-block w-100"
-            alt="salaar"
-          />
-        </div>
-        <div className="carousel-item">
-          <img
-            src="https://media5.bollywoodhungama.in/wp-content/uploads/2022/06/Jawan.jpe"
-            className="d-block w-100"
-            alt="Jawaan"
-          />
-        </div>
-        <div className="carousel-item">
-          <img
-            src="https://images.thedirect.com/media/photos/posd1_1.jpg"
-            className="d-block w-100"
-            alt="greyman"
-          />
-        </div>
-        <div className="carousel-item">
-          <img
-            src="https://images.news18.com/ibnlive/uploads/2020/07/1604654831_ganpath-first-look.jpg?impolicy=website&width=0&height=0"
-            className="d-block w-100"
-            alt="ganpath"
-          />
-        </div>
-      </div>
-      <button
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleControls"
-        data-bs-slide="prev"
-      >
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button
-        className="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleControls"
-        data-bs-slide="next"
-      >
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
-      </button>
-    </div>
-   
+    <Carousel style={{boxShadow:" 1em 2em 2em grey"}}>
+      <Carousel.Item>
+        <img
+          style={{
+            height: "70vh", width: "100%"  }}
+          className="d-block "
+          src="https://scontent.fdel50-1.fna.fbcdn.net/v/t39.30808-6/340085116_979816962913240_5033591519339597379_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=e3f864&_nc_ohc=CLtnTFP_uEUAX-XUYCl&_nc_ht=scontent.fdel50-1.fna&oh=00_AfCoCgN0bGYBvogZmOeMbuZUBlREafGXuVJSgpox1C5pmQ&oe=64F1CA92"
+          alt="First slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          style={{ height: "70vh", width: "100%" }}
+          className="d-block"
+          src="https://images.news18.com/ibnlive/uploads/2020/07/1604654831_ganpath-first-look.jpg?impolicy=website&width=0&height=0"
+          alt="Second slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          style={{ height: "70vh", width: "100%" }}
+          className="d-block "
+          src="https://dgcs.gos.pk/blogs/wp-content/uploads/2023/02/18059e5332.jpg"
+          alt="Third slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          style={{ height: "70vh", width: "100%" }}
+          className="d-block "
+          src="https://webneel.net/file/images/11-16/8-xmen-movie-poster-design.jpg"
+          alt="Fourth slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          style={{ height: "70vh", width: "100%" }}
+          className="d-block "
+          src="https://webneel.net/file/images/11-16/10-enders-game-movie-poster-designs.jpg"
+          alt="Fifth slide"
+        />
+      </Carousel.Item>
+    </Carousel>
   );
-  
 }
+
+export default MoviesCrousal;
