@@ -1,6 +1,6 @@
 body{
     background-color: black;
-    color:white !important;
+    color:white;
 }
 
 .authToggle:hover{
@@ -26,4 +26,5 @@ body{
 }
 .authInput{
     width:90%;
+
 }

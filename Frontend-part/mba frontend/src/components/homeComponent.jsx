@@ -3,6 +3,7 @@ import MoviesCrousal from "./Crousal";
 import MovieCard from "./MovieCard";
 import Navbar from "./Navbar";
 import { useState, useEffect } from "react";
+import Footer from "./footer";
 
 export default function HomeComponent() {
 
@@ -22,9 +23,7 @@ export default function HomeComponent() {
         ).catch((err) => {console.log(err);});
     }
     
-    if (loading) {
-        return <h1 className="vh-100 d-flex align-items-center justify-content-center">Please wait. Fetching all the movies ...........</h1>
-    }
+    
     return (
       <div>
         <Navbar movies={moviesList.map((movie) => movie.name)} />
@@ -49,13 +48,26 @@ export default function HomeComponent() {
 
           <div className="m-5">
             <p className="fs-4 lead p-4">Recommended</p>
-            <div className="mx-5" style={{ display: "flex", flexWrap: "wrap" }}>
-              {moviesList.map((movie) => (
-                <MovieCard key={movie._id} MovieInfo={{ ...movie }} />
-              ))}
-            </div>
+
+            {loading ? (
+              <>
+                <h1 className="vh-100 d-flex align-items-center justify-content-center">
+                  Please wait. Fetching all the movies ...........
+                </h1>
+              </>
+            ) : (
+              <div
+                className="mx-5"
+                style={{ display: "flex", flexWrap: "wrap" }}
+              >
+                {moviesList.map((movie) => (
+                  <MovieCard key={movie._id} MovieInfo={{ ...movie }} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
+        <Footer/>
       </div>
     );
 }

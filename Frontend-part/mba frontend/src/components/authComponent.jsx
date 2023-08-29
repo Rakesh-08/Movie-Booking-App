@@ -74,7 +74,7 @@ export default function AuthComponent() {
      };
 
   return (
-    <div className=" vh-100 bg-dark m-1  ">
+    <div className=" vh-100 bg-dark  border border-2 border-warning  ">
       <div className="text-warning  text-uppercase  display-4 mx-5 p-4  ">
         filmy duniyah
       </div>
@@ -89,7 +89,7 @@ export default function AuthComponent() {
           <form onSubmit={showSignup ? signupFn : LoginFn}>
             {showSignup && (
               <>
-                <div className="form-floating  m-1">
+                <div className="form-floating text-dark m-1">
                   <input
                     required
                     className="form-control authInput"
@@ -102,7 +102,7 @@ export default function AuthComponent() {
                   />
                   <label>Name</label>
                 </div>
-                <div className="form-floating m-1">
+                <div className="form-floating text-dark m-1">
                   <input
                     required
                     className="form-control authInput"
@@ -115,7 +115,7 @@ export default function AuthComponent() {
                   />
                   <label>Email</label>
                 </div>
-                <div className="form-floating m-1">
+                <div className="form-floating text-dark m-1">
                   <input
                     required
                     className="form-control authInput"
@@ -127,7 +127,7 @@ export default function AuthComponent() {
                   />
                   <label>Address</label>
                 </div>
-                <div className="form-floating m-1">
+                <div className="form-floating text-dark m-1">
                   <select
                     value={authInfo.userType}
                     onChange={(e) =>
@@ -142,24 +142,24 @@ export default function AuthComponent() {
                 </div>
               </>
             )}
-            <div className="form-floating m-1">
+            <div className="form-floating m-1 text-dark">
               <input
-                required
-                className="form-control authInput"
+                className="form-control authInput "
                 type="text"
                 placeholder="userId"
                 value={authInfo.userId}
                 onChange={(e) =>
                   setAuthInfo({ ...authInfo, userId: e.target.value })
                 }
+                required
               />
               <label>UserId</label>
             </div>
             <div className="d-flex m-1">
-              <div className="form-floating authInput ">
+              <div className="form-floating authInput text-dark ">
                 <input
                   required
-                  id="password"
+                  id="floatingPassword"
                   type={togglePassword}
                   className="form-control  "
                   placeholder="password"
@@ -168,7 +168,7 @@ export default function AuthComponent() {
                     setAuthInfo({ ...authInfo, password: e.target.value })
                   }
                 />{" "}
-                <label htmlFor="password">Password</label>
+                <label>Password</label>
               </div>
               <div>
                 <input
@@ -207,14 +207,11 @@ export default function AuthComponent() {
                 if (message.msg) {
                   setMessage({ ...message, msg: "" });
                 }
-                
               }}
             >
-              {showSignup
-                ? "login"
-                : " signup"}
+              {showSignup ? "login" : " signup"}
             </span>
-            
+
             <div className={`${message.color} text-center`}>{message.msg}</div>
           </div>
         </div>

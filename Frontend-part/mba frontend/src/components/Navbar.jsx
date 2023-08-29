@@ -14,7 +14,10 @@ export default function Navbar(props) {
     }
   }
   return (
-    <div style={{height:"10vh"}} className="d-flex shadow bg-secondary justify-content-around mb-1">
+    <div
+      style={{ height: "10vh" }}
+      className="d-flex shadow bg-secondary justify-content-around mb-1"
+    >
       <div className="m-1">
         <img
           style={{
@@ -32,20 +35,41 @@ export default function Navbar(props) {
           onSubmitFunction={props.onMovieSelect}
           recentSearches={props.movies}
           placeholder="   Search for a movie....."
-           />
-        <button  style={{ position: "absolute", right: "5%", top: "0.6em" ,border:"0",background:"transparent" }}>
+        />
+        <button
+          style={{
+            position: "absolute",
+            right: "5%",
+            top: "0.6em",
+            border: "0",
+            background: "transparent",
+          }}
+        >
           {" "}
           <SearchIcon />
         </button>
       </div>
       <div>
-        <p>{localStorage.getItem("Name")}</p>
-        {localStorage.getItem("mba_token") ? (<>
-          <span> Hi {localStorage.getItem("Name")}</span>
-          <button onClick={LogoutFn} className="btn btn-outline-danger">Logout</button>
-        </>
-        ) : (<>
-            <button onClick={()=>{NavigateTo("/Login")}} className="btn btn-info">Login</button>
+        
+        {localStorage.getItem("mba_token") ? (
+          <div className="my-3 ">
+            <button onClick={() => NavigateTo(`/${localStorage.getItem("userType")}`)} className="border-0 bg-secondary text-info" >{localStorage.getItem("userType")}</button>
+            <span className="mx-3"> Hi {localStorage.getItem("Name")}</span>
+            <button onClick={LogoutFn} className="btn  btn-outline-danger">
+              Logout
+            </button>
+          </div>
+        ) : (
+          <>
+            <span className="mx-3"> Hi User</span>
+            <button
+              onClick={() => {
+                NavigateTo("/Login");
+              }}
+              className="btn btn-info"
+            >
+              Login
+            </button>
           </>
         )}
       </div>

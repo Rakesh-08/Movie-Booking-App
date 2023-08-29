@@ -11,6 +11,8 @@ let apiUrl = {
   signupApi: "/movieBooking/api/v1/auth/signup",
   signinApi: "/movieBooking/api/v1/auth/signin",
   fetchMovies: "/movieBooking/api/v1/movies",
+  fetchUsers: "/movieBooking/api/v1/users",
+  fetchTheatres: "/movieBooking/api/v1/theatres",
 };
 
 export default apiUrl;
