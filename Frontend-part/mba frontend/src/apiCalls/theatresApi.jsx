@@ -3,7 +3,7 @@ import apiUrl from "./apiUtils";
 
 let getAllTheatresCall = async () => {
   return await axios.get(
-    "http://localhost:9898" + apiUrl.fetchTheatres,
+    apiUrl.Base_url + apiUrl.fetchTheatres,
     apiUrl.apiHeader
   );
 };

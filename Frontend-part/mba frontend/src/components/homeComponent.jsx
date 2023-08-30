@@ -10,8 +10,9 @@ export default function HomeComponent() {
     let [moviesList, setMoviesList] = useState([]);
     let [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        fetchAllMovies();
+  useEffect(() => { 
+      fetchAllMovies();
+     
     }, [])
    
     
@@ -46,7 +47,7 @@ export default function HomeComponent() {
             <p>For Kids</p>
           </div> */}
 
-          <div className="m-5">
+          <div className="m-5 ">
             <p className="fs-4 lead p-4">Recommended</p>
 
             {loading ? (
@@ -57,8 +58,8 @@ export default function HomeComponent() {
               </>
             ) : (
               <div
-                className="mx-5"
-                style={{ display: "flex", flexWrap: "wrap" }}
+                className="mx-3 "
+                style={{ display: "flex", flexWrap: "wrap",justifyContent:"center"}}
               >
                 {moviesList.map((movie) => (
                   <MovieCard key={movie._id} MovieInfo={{ ...movie }} />

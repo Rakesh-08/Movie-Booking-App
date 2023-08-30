@@ -3,7 +3,7 @@ import apiUrl from "./apiUtils";
 
 
 const getAllMovies =async () => {
-    return await axios.get("http://localhost:9898"+ apiUrl.fetchMovies)
+    return await axios.get(apiUrl.Base_url+ apiUrl.fetchMovies)
 }
 
 

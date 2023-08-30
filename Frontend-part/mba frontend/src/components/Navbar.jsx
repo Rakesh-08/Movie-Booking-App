@@ -10,7 +10,7 @@ export default function Navbar(props) {
     
     if (confirm) {
       localStorage.clear();
-      alert("Log out successfully")
+        NavigateTo("/login")
     }
   }
   return (
@@ -60,7 +60,7 @@ export default function Navbar(props) {
             </button>
           </div>
         ) : (
-          <>
+          <div className="my-3">
             <span className="mx-3"> Hi User</span>
             <button
               onClick={() => {
@@ -70,7 +70,7 @@ export default function Navbar(props) {
             >
               Login
             </button>
-          </>
+          </div>
         )}
       </div>
     </div>
