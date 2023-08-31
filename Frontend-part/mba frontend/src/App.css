@@ -19,11 +19,19 @@ body{
      font-family:'Times New Roman', Times, serif;
      color:rgb(199, 197, 196)
 }
+@media  screen and (max-width:568px) {
+    .moviecard{
+        min-width: 22vw;
+    height:38vh !important;
+    }
+}
 
 .searchBar{
     width: 49vw;
     height:5vh;
     border-radius:2em;
+    color:black;
+    list-style-type: none;
 }
 
 .authBox{

@@ -11,16 +11,20 @@ export default function MovieCard({MovieInfo}) {
            localStorage.setItem("selectedMovie",JSON.stringify(MovieInfo))
           NavigateTo("/Movies/Details")
         }}
-        style={{ width: "18rem", height: "44vh" }}
-        className="card moviecard m-3  bg-secondary "
+        style={{
+          width: "20vw", height: "33vh"
+          
+        }}
+        className="card moviecard m-2  bg-secondary "
       >
         <img
           src={MovieInfo.posterURL}
-          className="card-img-top h-50"
+          style={{height:"60%"}}
+          className="card-img-top "
           alt="poster"
         ></img>
-        <div style={{ lineHeight: "0.6" }} className="p-2 ">
-          <h6 className="card-title text-white  fs-6 my-3   ">
+        <div style={{ lineHeight: "0.6" }} className="mx-2 ">
+          <h6 className="card-title text-white  fs-6   ">
             {MovieInfo.name}
             <p>({MovieInfo.releaseDate.slice(0, 4)})</p>
           </h6>
@@ -39,12 +43,8 @@ export default function MovieCard({MovieInfo}) {
               {MovieInfo.language}
             </span>
           </p>
-          <p>
           
-            <span className="bold fst-italic mx-1">
-              {MovieInfo.movieLength}
-            </span>
-          </p>
+
           
         </div>
       </div>

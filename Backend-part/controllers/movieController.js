@@ -1,5 +1,6 @@
 let movieModel= require("../models/movieModel");
 const theatreModel = require("../models/theatreModel");
+let userModel= require("../models/userModel")
 let constants = require("../utils/constants");
 
 let createMovie = async (req, res) => {
@@ -66,6 +67,30 @@ let getAllMovies = async (req, res) => {
 
         if (genre) {
             query.genre = genre;
+        }
+
+        let requester = await userModel.findOne({
+            userId:req.userId
+        })
+
+        if (requester.userType == constants.userTypes.client) {
+            
+            let moviesInOwnedTheatres = await theatreModel.find({
+                ownerId:requester._id
+            }).select({ movies: 1 })
+
+            let temp = [];
+
+            moviesInOwnedTheatres.map(obj => temp.concat(obj.movies))
+            
+            let movies = await movieModel.find({
+                _id: {
+                    $in:temp
+                }
+            })
+
+            return res.status(200).send(movies)
+            
         }
 
         let allMovies = await movieModel.find(query)

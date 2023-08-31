@@ -235,7 +235,7 @@ export default function Footer() {
         className="text-center p-3"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
       >
-        © Rakeh_Mandal 2023 Copyright:
+        © Rakesh_Mandal 2023 Copyright:
         <a className="text-white" href="https://mdbootstrap.com/">
           FilmyDuniyah.com
         </a>

@@ -1,6 +1,7 @@
 import SearchIcon from "@mui/icons-material/Search";
 import SuggestionInputSearch from "suggestion-react-input-search";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Navbar(props) {
   let NavigateTo = useNavigate()
@@ -32,9 +33,12 @@ export default function Navbar(props) {
       <div className="m-2 p-2 w-50 d-flex position-relative ">
         <SuggestionInputSearch
           inputClass="searchBar"
+          suggestionListClass="searchBar"
           onSubmitFunction={props.onMovieSelect}
           recentSearches={props.movies}
+          autocompleteOnMatch={true}
           placeholder="   Search for a movie....."
+          
         />
         <button
           style={{
@@ -50,10 +54,14 @@ export default function Navbar(props) {
         </button>
       </div>
       <div>
-        
         {localStorage.getItem("mba_token") ? (
           <div className="my-3 ">
-            <button onClick={() => NavigateTo(`/${localStorage.getItem("userType")}`)} className="border-0 bg-secondary text-info" >{localStorage.getItem("userType")}</button>
+            <button
+              onClick={() => NavigateTo(`/${localStorage.getItem("userType")}`)}
+              className="border-0 bg-secondary text-info"
+            >
+              {localStorage.getItem("userType")}
+            </button>
             <span className="mx-3"> Hi {localStorage.getItem("Name")}</span>
             <button onClick={LogoutFn} className="btn  btn-outline-danger">
               Logout

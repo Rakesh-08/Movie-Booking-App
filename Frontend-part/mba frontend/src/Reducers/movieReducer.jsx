@@ -12,6 +12,7 @@ let movieReducer = (state = initState, action) => {
         case "SET_MOVIESLIST":
             let result = { ...state, allMovies: action.payload }
             return result;
+    
         default:
             return state;
     

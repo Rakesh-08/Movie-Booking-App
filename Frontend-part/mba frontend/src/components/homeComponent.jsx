@@ -4,19 +4,22 @@ import MovieCard from "./MovieCard";
 import Navbar from "./Navbar";
 import { useState, useEffect } from "react";
 import Footer from "./footer";
-import {useSelector,useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate }from "react-router-dom"
 
 
 export default function HomeComponent() {
-    let [loading, setLoading] = useState(true)
+  let [loading, setLoading] = useState(true)
+  
+  let NavigateTo = useNavigate();
 
   useEffect(() => { 
-
-    if (localStorage.getItem("moveisList") == null) {
+        
+    if (localStorage.getItem("moveisList") === undefined) {
       fetchAllMovies();
-      console.log("fetching all movies")
+      
     }
-     
+       setLoading(false)
      
   }, [])
   
@@ -41,10 +44,15 @@ export default function HomeComponent() {
         ).catch((err) => {console.log(err);});
     }
     
+  let onMovieSelect = (e) => {
+    let temp = moviesList?.find(movie => movie.name == e)
+    localStorage.setItem("selectedMovie", JSON.stringify(temp));
+    NavigateTo("/movies/Details")
+   }
     
     return (
       <div>
-        <Navbar movies={moviesList?.map((movie) => movie.name)} />
+        <Navbar movies={moviesList?.map((movie) => movie.name)} onMovieSelect={onMovieSelect} />
         <MoviesCrousal style={{ boxShadow: "inset -1em -1em  1em grey" }} />
 
         <div>
