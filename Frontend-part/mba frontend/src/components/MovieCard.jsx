@@ -1,10 +1,16 @@
 
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function MovieCard({MovieInfo}) {
-    
+  let dispatch = useDispatch();
+  let NavigateTo = useNavigate();
     return (
       <div
-        onClick={()=>{alert( `Good choice! its fun to watch ${MovieInfo.name}`)}}
+        onClick={() => {
+           localStorage.setItem("selectedMovie",JSON.stringify(MovieInfo))
+          NavigateTo("/Movies/Details")
+        }}
         style={{ width: "18rem", height: "44vh" }}
         className="card moviecard m-3  bg-secondary "
       >

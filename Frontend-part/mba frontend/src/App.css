@@ -12,6 +12,12 @@ body{
   cursor: pointer;
   transform: scale(1.02);
   opacity: 0.8;
+
+}
+
+.movieDetails{
+     font-family:'Times New Roman', Times, serif;
+     color:rgb(199, 197, 196)
 }
 
 .searchBar{

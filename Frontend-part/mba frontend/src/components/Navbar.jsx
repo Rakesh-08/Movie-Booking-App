@@ -66,7 +66,7 @@ export default function Navbar(props) {
               onClick={() => {
                 NavigateTo("/Login");
               }}
-              className="btn btn-info"
+              className="btn btn-outline-primary"
             >
               Login
             </button>

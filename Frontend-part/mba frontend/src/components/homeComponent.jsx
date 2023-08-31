@@ -4,21 +4,38 @@ import MovieCard from "./MovieCard";
 import Navbar from "./Navbar";
 import { useState, useEffect } from "react";
 import Footer from "./footer";
+import {useSelector,useDispatch} from "react-redux";
+
 
 export default function HomeComponent() {
-
-    let [moviesList, setMoviesList] = useState([]);
     let [loading, setLoading] = useState(true)
 
   useEffect(() => { 
+
+    if (localStorage.getItem("moveisList") == null) {
       fetchAllMovies();
+      console.log("fetching all movies")
+    }
      
-    }, [])
-   
+     
+  }, [])
+  
+
+  // let moviesList=useSelector(state=>state.moviesList.allMovies);
+  let moviesList = JSON.parse(localStorage.getItem("moviesList"));
+  let dispatch = useDispatch();
+
+  
+
     
     let fetchAllMovies = () => {
-     getAllMovies().then((response) => {
-            setMoviesList(response.data)
+      getAllMovies().then((response) => {
+
+        localStorage.setItem("moviesList", JSON.stringify(response.data))
+     
+       dispatch({type:"SET_MOVIESLIST",
+         payload: response.data
+       })
             setLoading(false)
             }
         ).catch((err) => {console.log(err);});
@@ -27,7 +44,7 @@ export default function HomeComponent() {
     
     return (
       <div>
-        <Navbar movies={moviesList.map((movie) => movie.name)} />
+        <Navbar movies={moviesList?.map((movie) => movie.name)} />
         <MoviesCrousal style={{ boxShadow: "inset -1em -1em  1em grey" }} />
 
         <div>
@@ -59,9 +76,9 @@ export default function HomeComponent() {
             ) : (
               <div
                 className="mx-3 "
-                style={{ display: "flex", flexWrap: "wrap",justifyContent:"center"}}
+                style={{ display:"flex" , flexWrap:"wrap",justifyContent:"center"}}
               >
-                {moviesList.map((movie) => (
+                {moviesList?.map((movie) => (
                   <MovieCard key={movie._id} MovieInfo={{ ...movie }} />
                 ))}
               </div>
