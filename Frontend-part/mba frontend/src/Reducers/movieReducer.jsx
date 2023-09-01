@@ -3,19 +3,22 @@ import { combineReducers } from "redux"
 
 let initState = {
    
-    allMovies:[]
+    allMovies: [],
+    moviesByLanguage:[]
 }
 
 let movieReducer = (state = initState, action) => {
 
     switch (action.type) {
-        case "SET_MOVIESLIST":
-            let result = { ...state, allMovies: action.payload }
-            return result;
-    
-        default:
-            return state;
-    
+      case "SET_MOVIESLIST":
+        let result = { ...state, allMovies: action.payload };
+        return result;
+      case "movies":
+            let temp = { ...state, moviesByLanguage: action.payload };
+        return temp;
+
+      default:
+        return state;
     }
 }
 

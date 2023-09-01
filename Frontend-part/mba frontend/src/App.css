@@ -5,7 +5,7 @@ body{
 
 .authToggle:hover{
    cursor: pointer;
-   color:rgb(27, 27, 211);
+   color:rgb(27, 27, 211)!important;
   
 }
 .moviecard:hover{
@@ -22,17 +22,23 @@ body{
 @media  screen and (max-width:668px) {
     .moviecard{
         min-width: 27vw;
-    height:22vh !important;
+    height:20vh !important;
 
     }
     .moviecard img{
-        height:39% !important;
+        height:40% !important;
     }
     .cardFont{
-        font-size: 70% !important;
-       
+        font-size: 70% !important;       
 }
+
+.crousal {
+height: 25vh!important;
 }
+    
+}
+
+
 
 .searchBar{
     width: 49vw;

@@ -13,24 +13,25 @@ export default function HomeComponent() {
   
   let NavigateTo = useNavigate();
 
-  useEffect(() => { 
-        
-    if (!localStorage.getItem("moveisList")) {
+  useEffect(() => {
+       
+    if (JSON.parse(localStorage.getItem("moviesList")) == null) {
       fetchAllMovies();
-      console.log("log")
-      
+      console.log("fetching");
     } else {
-      setLoading(false)
-      console.log("out")
+      setLoading(false);
+      console.log("cahed ");
     }
       
      
   }, [])
+
   
 
   // let moviesList=useSelector(state=>state.moviesList.allMovies);
   let moviesList = JSON.parse(localStorage.getItem("moviesList"));
   let dispatch = useDispatch();
+  
 
   
 
@@ -61,29 +62,14 @@ export default function HomeComponent() {
     
     return (
       <div>
-        <Navbar movies={moviesList?.map((movie) => movie.name)} onMovieSelect={onMovieSelect} />
-        <MoviesCrousal  />
+        <Navbar
+          movies={moviesList?.map((movie) => movie.name)}
+          onMovieSelect={onMovieSelect}
+        />
+        <MoviesCrousal />
 
         <div>
-          {/* <div>
-            <p>Recently viewed</p>
-          </div>
-          <div>
-            <p>Bollywood</p>
-          </div>
-          <div>
-            <p> South Cinema</p>
-          </div>{" "}
-          <div>
-            <p>Hollywood</p>
-          </div>
-          <div>
-            <p>For Kids</p>
-          </div> */}
-
-          <div className="m-5 ">
-            <p className="fs-4 lead p-4">Recommended</p>
-
+          <div className="m-5 p-3 ">
             {loading ? (
               <>
                 <h1 className="vh-100 d-flex align-items-center justify-content-center">
@@ -91,20 +77,86 @@ export default function HomeComponent() {
                 </h1>
               </>
             ) : (
-              <div
-               
-                  style={{
-                    display: "flex", flexWrap: "wrap",
-                  justifyContent: "center"}}
-              >
-                {moviesList?.map((movie) => (
-                  <MovieCard key={movie._id} MovieInfo={{ ...movie }} />
-                ))}
-              </div>
+              <>
+                <MovieListByLanguage
+                  heading="Bollywood"
+                  moviesList={moviesList.filter(
+                    (movie) => movie.language === "Hindi"
+                  )}
+                  dispatch={dispatch}
+                  NavigateTo={NavigateTo}
+                />
+                <MovieListByLanguage
+                  heading="South cinema"
+                  moviesList={moviesList.filter(
+                    (movie) => movie.language === "Telgu"
+                  )}
+                  dispatch={dispatch}
+                  NavigateTo={NavigateTo}
+                />
+                <MovieListByLanguage
+                  heading="Hollywood"
+                  moviesList={moviesList.filter(
+                    (movie) => movie.language === "English"
+                  )}
+                  dispatch={dispatch}
+                  NavigateTo={NavigateTo}
+                />
+                <MovieListByLanguage
+                  heading="For Kids"
+                  moviesList={moviesList.filter(
+                    (movie) => movie.language === "cartoon"
+                  )}
+                  dispatch={dispatch}
+                  NavigateTo={NavigateTo}
+                />
+                <MovieListByLanguage
+                  heading="Recomended"
+                  moviesList={moviesList}
+                  dispatch={dispatch}
+                  NavigateTo={NavigateTo}
+                />
+              </>
             )}
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     );
 }
+
+let MovieListByLanguage = ({ heading, moviesList, dispatch, NavigateTo }) => {
+  
+  return (
+    <div className="m-2 ">
+      <h5 className="fs-4 lead ">{heading}</h5>
+      <div className=" d-flex justify-content-end ">
+         <button
+        onClick={() => {
+          dispatch({
+            type: "movies",
+            payload: moviesList,
+          });
+          NavigateTo("/Movies");
+        }}
+        className="  fs-6 btn border-0 text-white   authToggle"
+      >
+        see all
+      </button>
+      </div>
+     
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        {moviesList?.slice(0, 4).map((movie) => (
+          <MovieCard key={movie._id} MovieInfo={{ ...movie }} />
+        ))}
+      </div>
+    </div>
+  );
+}
+

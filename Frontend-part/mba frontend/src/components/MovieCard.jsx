@@ -28,7 +28,7 @@ export default function MovieCard({MovieInfo}) {
             {MovieInfo.name}
             <p>({MovieInfo.releaseDate.slice(0, 4)})</p>
           </h6>
-          <p>
+          <p >
             {" "}
             {Array(Math.floor(MovieInfo.imdbRating.slice(0, 1) / 2))
               .fill()
@@ -39,7 +39,7 @@ export default function MovieCard({MovieInfo}) {
               ))}
           </p>
 
-          <p>
+          <p style={{ lineHeight: "0" }}>
             <span className="bold cardFont  fst-italic mx-1">
               {MovieInfo.language}
             </span>

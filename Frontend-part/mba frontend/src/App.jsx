@@ -7,6 +7,7 @@ import HomeComponent from './components/homeComponent';
 import AdminPage from './components/adminPage';
 import ClientPage from './components/clientPage';
 import MovieDetails from './components/MovieDetailsPage';
+import AllMoviesListByLang from './components/AllMoviesListByLanguage';
 
 function App() {
  
@@ -18,7 +19,8 @@ function App() {
         <Route path="/Error" element={<ErrorPage />}></Route>
         <Route path="/ADMIN" element={<AdminPage />}></Route>
         <Route path="/CLIENT" element={<ClientPage />}></Route>
-        <Route path="/Movies/Details" element={<MovieDetails/>}></Route>
+        <Route path="/Movies/Details" element={<MovieDetails />}></Route>
+        <Route path="/Movies" element={<AllMoviesListByLang/> }></Route>
       </Routes>
     </BrowserRouter>
   );
