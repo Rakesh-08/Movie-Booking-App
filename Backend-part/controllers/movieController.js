@@ -73,7 +73,7 @@ let getAllMovies = async (req, res) => {
             userId:req.userId
         })
 
-        if (requester.userType == constants.userTypes.client) {
+        if (requester && requester.userType == constants.userTypes.client) {
             
             let moviesInOwnedTheatres = await theatreModel.find({
                 ownerId:requester._id

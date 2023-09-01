@@ -1,5 +1,10 @@
 
 import React from "react";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import GoogleIcon from "@mui/icons-material/Google";
 import {
   MDBFooter,
   MDBContainer,
@@ -23,7 +28,7 @@ export default function Footer() {
             href="#!"
             role="button"
           >
-            <MDBIcon color="secondary" fab icon="facebook-f" />
+           <FacebookIcon/>
           </MDBBtn>
 
           <MDBBtn
@@ -34,7 +39,7 @@ export default function Footer() {
             href="#!"
             role="button"
           >
-            <MDBIcon fab icon="twitter" />
+            <TwitterIcon/>
           </MDBBtn>
 
           <MDBBtn
@@ -45,7 +50,7 @@ export default function Footer() {
             href="#!"
             role="button"
           >
-            <MDBIcon fab icon="google" />
+            <InstagramIcon/>
           </MDBBtn>
 
           <MDBBtn
@@ -56,7 +61,7 @@ export default function Footer() {
             href="#!"
             role="button"
           >
-            <MDBIcon fab icon="instagram" />
+            <GoogleIcon/>
           </MDBBtn>
 
           <MDBBtn
@@ -67,18 +72,7 @@ export default function Footer() {
             href="#!"
             role="button"
           >
-            <MDBIcon fab icon="linkedin-in" />
-          </MDBBtn>
-
-          <MDBBtn
-            outline
-            color="light"
-            floating
-            className="m-1"
-            href="#!"
-            role="button"
-          >
-            <MDBIcon color="secondary" fab icon="github" />
+            <GitHubIcon/>
           </MDBBtn>
         </section>
 
@@ -111,10 +105,9 @@ export default function Footer() {
 
         <section className="mb-4">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-            distinctio earum repellat quaerat voluptatibus placeat nam, commodi
-            optio pariatur est quia magnam eum harum corrupti dicta, aliquam
-            sequi voluptate quas.
+            This is a movie booking app where you can search the movie you want
+            to watch and then select any nearby theatre that screens that movie
+            and book your timing slot and no. of tickets in that theatre
           </p>
         </section>
 
@@ -153,17 +146,17 @@ export default function Footer() {
               <ul className="list-unstyled mb-0">
                 <li>
                   <a href="#!" className="text-white">
-                    Link 1
+                    Terms and conditions
                   </a>
                 </li>
                 <li>
                   <a href="#!" className="text-white">
-                    Link 2
+                    contact us
                   </a>
                 </li>
                 <li>
                   <a href="#!" className="text-white">
-                    Link 3
+                    Blogs
                   </a>
                 </li>
                 <li>

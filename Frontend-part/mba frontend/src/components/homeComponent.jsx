@@ -15,11 +15,15 @@ export default function HomeComponent() {
 
   useEffect(() => { 
         
-    if (localStorage.getItem("moveisList") === undefined) {
+    if (!localStorage.getItem("moveisList")) {
       fetchAllMovies();
+      console.log("log")
       
+    } else {
+      setLoading(false)
+      console.log("out")
     }
-       setLoading(false)
+      
      
   }, [])
   
@@ -46,6 +50,11 @@ export default function HomeComponent() {
     
   let onMovieSelect = (e) => {
     let temp = moviesList?.find(movie => movie.name == e)
+    
+    if (temp == undefined) {
+      return alert(
+        `Sorry! ${e} Movie not found`)
+      }
     localStorage.setItem("selectedMovie", JSON.stringify(temp));
     NavigateTo("/movies/Details")
    }
@@ -53,7 +62,7 @@ export default function HomeComponent() {
     return (
       <div>
         <Navbar movies={moviesList?.map((movie) => movie.name)} onMovieSelect={onMovieSelect} />
-        <MoviesCrousal style={{ boxShadow: "inset -1em -1em  1em grey" }} />
+        <MoviesCrousal  />
 
         <div>
           {/* <div>
@@ -83,8 +92,10 @@ export default function HomeComponent() {
               </>
             ) : (
               <div
-                className="mx-3 "
-                style={{ display:"flex" , flexWrap:"wrap",justifyContent:"center"}}
+               
+                  style={{
+                    display: "flex", flexWrap: "wrap",
+                  justifyContent: "center"}}
               >
                 {moviesList?.map((movie) => (
                   <MovieCard key={movie._id} MovieInfo={{ ...movie }} />

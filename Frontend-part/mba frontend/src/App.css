@@ -19,11 +19,19 @@ body{
      font-family:'Times New Roman', Times, serif;
      color:rgb(199, 197, 196)
 }
-@media  screen and (max-width:568px) {
+@media  screen and (max-width:668px) {
     .moviecard{
-        min-width: 22vw;
-    height:38vh !important;
+        min-width: 27vw;
+    height:22vh !important;
+
     }
+    .moviecard img{
+        height:39% !important;
+    }
+    .cardFont{
+        font-size: 70% !important;
+       
+}
 }
 
 .searchBar{

@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import MaterialTable from "@material-table/core";
+import { useState } from "react";
 
 
 export default function ClientPage() {
-    
+    let [theatres,setTheatres]= useState([])
 
     let NavigateTo=useNavigate();
     return (
@@ -14,6 +16,15 @@ export default function ClientPage() {
           >
             Filmy Duniyah
           </p>
+
+          <div>
+            <MaterialTable
+              title="Movies running in your theatres"
+              column={theatreColumns}
+              data={theatres}
+            />
+            
+          </div>
          
            
           </div>
