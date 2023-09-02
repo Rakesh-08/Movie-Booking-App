@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 export default function MovieCard({MovieInfo}) {
   let dispatch = useDispatch();
   let NavigateTo = useNavigate();
+
+
     return (
       <div
         onClick={() => {
@@ -42,7 +44,7 @@ export default function MovieCard({MovieInfo}) {
 
         </div>
       </div>
-    );
+    )
 }
 
 

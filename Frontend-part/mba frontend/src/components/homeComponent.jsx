@@ -32,6 +32,7 @@ export default function HomeComponent() {
   // let moviesList=useSelector(state=>state.moviesList.allMovies);
   let moviesList = JSON.parse(localStorage.getItem("moviesList"));
   let dispatch = useDispatch();
+  
     
     let fetchAllMovies = () => {
       getAllMovies().then((response) => {
@@ -66,7 +67,7 @@ export default function HomeComponent() {
         <MoviesCrousal />
 
         <div>
-          <div className="m-5 p-3 ">
+          <div className="p-5 my-2">
             {loading ? (
               <>
                 <h1 className="vh-100 d-flex align-items-center justify-content-center">
@@ -123,10 +124,10 @@ export default function HomeComponent() {
           
           <div className="d-flex align-items-center justify-content-center flex-wrap p-3  ">
           {trailers.map((url,i) => 
-            <div key={i} className="p-1 moviecard">
+            <div key={i} className=" m-2 ">
               <iframe
-                width="70%"
-                height="180"
+                width="80%"
+                height="200"
                 src={url}
                 title="YouTube video player"
                 frameBorder="0"
@@ -144,9 +145,9 @@ export default function HomeComponent() {
 }
 
 let MovieListByLanguage = ({ heading, moviesList, dispatch, NavigateTo }) => {
-  
+     
   return (
-    <div className="m-2 ">
+    <div className="my-4 ">
       <h5 className="fs-4 lead ">{heading}</h5>
       <div className=" d-flex justify-content-end ">
          <button

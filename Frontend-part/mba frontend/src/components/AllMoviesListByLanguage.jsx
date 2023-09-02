@@ -17,7 +17,8 @@ export default function AllMoviesListByLang() {
           style={{
             display: "flex",
                     flexWrap: "wrap",
-            marginLeft:"5%"
+            marginLeft: "5%",
+            justifyContent: "center"
           }}
         >
           {moviesList?.map((movie) => (
