@@ -25,7 +25,7 @@ export default function MovieDetails() {
             
         </div>
 
-        <div className="pt-5   d-flex  justify-content-center m-4">
+        <div className="pt-5 castDetails  d-flex  justify-content-center m-4">
           <div className=" p-4  text-center ">
             <img
               style={{ width: "40%", height: "23vh" }}

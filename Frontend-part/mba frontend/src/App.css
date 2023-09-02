@@ -3,6 +3,10 @@ body{
     color:white;
 }
 
+.hovereffect{
+    cursor: pointer;
+}
+
 .authToggle:hover{
    cursor: pointer;
    color:rgb(27, 27, 211)!important;
@@ -21,31 +25,54 @@ body{
 }
 @media  screen and (max-width:668px) {
     .moviecard{
-        min-width: 27vw;
+    width: 24vw !important;
     height:20vh !important;
 
     }
+    .logo{
+        font-size: 9px!important;
+    }
     .moviecard img{
-        height:40% !important;
+        height:60% !important;
     }
     .cardFont{
         font-size: 70% !important;       
 }
 
-.crousal {
+.castDetails{
+    display: inline !important;
+}
+.navSidebar{
+    display: none;
+}
+.sidebar{
+    display: block !important;
+}
+.offcanvas{
+    background-color: gray;
+    color:white;
+    padding:1em;
+width: 35% !important;
+}
+.slidingwindow {
 height: 25vh!important;
 }
-    
+
 }
 
-
+.sidebar{
+    display: none;
+}
 
 .searchBar{
-    width: 49vw;
+     width: 49vw;
     height:5vh;
     border-radius:2em;
-    color:black;
-    list-style-type: none;
+    padding: 1em;
+}
+
+.searchBar>div{
+    width: 100%;
 }
 
 .authBox{

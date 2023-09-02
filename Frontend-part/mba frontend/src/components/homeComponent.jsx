@@ -5,11 +5,14 @@ import Navbar from "./Navbar";
 import { useState, useEffect } from "react";
 import Footer from "./footer";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate }from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import trailers from "/public/constants";
+
 
 
 export default function HomeComponent() {
   let [loading, setLoading] = useState(true)
+ 
   
   let NavigateTo = useNavigate();
 
@@ -26,15 +29,9 @@ export default function HomeComponent() {
      
   }, [])
 
-  
-
   // let moviesList=useSelector(state=>state.moviesList.allMovies);
   let moviesList = JSON.parse(localStorage.getItem("moviesList"));
   let dispatch = useDispatch();
-  
-
-  
-
     
     let fetchAllMovies = () => {
       getAllMovies().then((response) => {
@@ -63,7 +60,7 @@ export default function HomeComponent() {
     return (
       <div>
         <Navbar
-          movies={moviesList?.map((movie) => movie.name)}
+          movies={moviesList}
           onMovieSelect={onMovieSelect}
         />
         <MoviesCrousal />
@@ -120,6 +117,27 @@ export default function HomeComponent() {
             )}
           </div>
         </div>
+
+        <div className="m-4 ">
+          <p className="mx-3">Upcoming Movie Trailers </p>
+          
+          <div className="d-flex align-items-center justify-content-center flex-wrap p-3  ">
+          {trailers.map((url,i) => 
+            <div key={i} className="p-1 moviecard">
+              <iframe
+                width="70%"
+                height="180"
+                src={url}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share  "
+                allowFullScreen={true}
+              ></iframe>
+            </div>
+          )}</div>
+        </div>
+
+       
         <Footer />
       </div>
     );
@@ -159,4 +177,5 @@ let MovieListByLanguage = ({ heading, moviesList, dispatch, NavigateTo }) => {
     </div>
   );
 }
+
 
