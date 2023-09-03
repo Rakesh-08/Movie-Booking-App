@@ -100,17 +100,18 @@ export default function HomeComponent() {
                   dispatch={dispatch}
                   NavigateTo={NavigateTo}
                 />
+               
                 <MovieListByLanguage
+                  heading="Recomended"
+                  moviesList={moviesList}
+                  dispatch={dispatch}
+                  NavigateTo={NavigateTo}
+                  />
+                  <MovieListByLanguage
                   heading="For Kids"
                   moviesList={moviesList.filter(
                     (movie) => movie.language === "cartoon"
                   )}
-                  dispatch={dispatch}
-                  NavigateTo={NavigateTo}
-                />
-                <MovieListByLanguage
-                  heading="Recomended"
-                  moviesList={moviesList}
                   dispatch={dispatch}
                   NavigateTo={NavigateTo}
                 />
