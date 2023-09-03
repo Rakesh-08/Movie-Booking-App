@@ -11,33 +11,31 @@ import trailers from "/public/constants";
 
 
 export default function HomeComponent() {
-  let [loading, setLoading] = useState(true)
+  let [loading, setLoading] = useState(true);
  
-  
   let NavigateTo = useNavigate();
+  let dispatch = useDispatch();
+   let moviesList=useSelector(state=>state.moviesList.allMovies);
 
   useEffect(() => {
-       
-    if (JSON.parse(localStorage.getItem("moviesList")) == null) {
-      fetchAllMovies();
-      console.log("fetching");
-    } else {
-      setLoading(false);
-      console.log("cahed ");
-    }
+    
+     fetchAllMovies();
+    if (localStorage.getItem("moviesList")==1) {
+      console.log("cached")
       
+    } else {
+      console.log("fetching")
      
+    }  
+
+
   }, [])
 
-  // let moviesList=useSelector(state=>state.moviesList.allMovies);
-  let moviesList = JSON.parse(localStorage.getItem("moviesList"));
-  let dispatch = useDispatch();
-  
     
     let fetchAllMovies = () => {
       getAllMovies().then((response) => {
-
-        localStorage.setItem("moviesList", JSON.stringify(response.data))
+   
+        localStorage.setItem("moviesList", 1)
      
        dispatch({type:"SET_MOVIESLIST",
          payload: response.data
@@ -100,18 +98,17 @@ export default function HomeComponent() {
                   dispatch={dispatch}
                   NavigateTo={NavigateTo}
                 />
-               
                 <MovieListByLanguage
-                  heading="Recomended"
-                  moviesList={moviesList}
-                  dispatch={dispatch}
-                  NavigateTo={NavigateTo}
-                  />
-                  <MovieListByLanguage
                   heading="For Kids"
                   moviesList={moviesList.filter(
                     (movie) => movie.language === "cartoon"
                   )}
+                  dispatch={dispatch}
+                  NavigateTo={NavigateTo}
+                />
+                <MovieListByLanguage
+                  heading="Recomended"
+                  moviesList={moviesList}
                   dispatch={dispatch}
                   NavigateTo={NavigateTo}
                 />
@@ -125,9 +122,9 @@ export default function HomeComponent() {
           
           <div className="d-flex align-items-center justify-content-center flex-wrap p-3  ">
           {trailers.map((url,i) => 
-            <div key={i} className=" m-2 ">
+            <div key={i} className=" m-2 hovereffect ">
               <iframe
-                width="80%"
+                width="100%"
                 height="200"
                 src={url}
                 title="YouTube video player"

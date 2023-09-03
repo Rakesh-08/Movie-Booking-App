@@ -11,6 +11,7 @@ export default function Navbar(props) {
   const closeSidebar = () => setShow(false);
   const showSidebar = () => setShow(true);  
 
+
   let LogoutFn = () => {
     
     let confirm = window.confirm('Are you sure you want to log out?')

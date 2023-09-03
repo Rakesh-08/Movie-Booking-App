@@ -69,29 +69,31 @@ let getAllMovies = async (req, res) => {
             query.genre = genre;
         }
 
-        let requester = await userModel.findOne({
-            userId:req.userId
-        })
+        // For fetching all movies from different theatres owned by a client
 
-        if (requester && requester.userType == constants.userTypes.client) {
+        // let requester = await userModel.findOne({
+        //     userId:req.userId
+        // })
+
+        // if (requester && requester.userType == constants.userTypes.client) {
             
-            let moviesInOwnedTheatres = await theatreModel.find({
-                ownerId:requester._id
-            }).select({ movies: 1 })
+        //     let moviesInOwnedTheatres = await theatreModel.find({
+        //         ownerId:requester._id
+        //     }).select({ movies: 1 })
 
-            let temp = [];
+        //     let temp = [];
 
-            moviesInOwnedTheatres.map(obj => temp.concat(obj.movies))
+        //     moviesInOwnedTheatres.map(obj => temp.concat(obj.movies))
             
-            let movies = await movieModel.find({
-                _id: {
-                    $in:temp
-                }
-            })
+        //     let movies = await movieModel.find({
+        //         _id: {
+        //             $in:temp
+        //         }
+        //     })
 
-            return res.status(200).send(movies)
+        //     return res.status(200).send(movies)
             
-        }
+        // }
 
         let allMovies = await movieModel.find(query)
         

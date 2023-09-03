@@ -62,7 +62,8 @@ export default function AuthComponent() {
         .then((response) => {
           localStorage.setItem("Name", response.data.name)
           localStorage.setItem("userType", response.data.userType);
-          localStorage.setItem("mba_token", response.data.accessToken)
+          localStorage.setItem("mba_token", response.data.accessToken);
+          localStorage.setItem("_id",response.data._id)
           NavigateTo("/")
         })
         .catch((err) => {

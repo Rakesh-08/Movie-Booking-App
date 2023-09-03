@@ -87,10 +87,14 @@ let getAllTheatres = async (req, res) => {
     try {
 
         let query = {};
-        let { pincode, city, name, movieId } = req.query
+        let { pincode, city, name, movieId,ownerId } = req.query
         
         if (name != undefined) {
             query.name=name
+        }
+
+        if (ownerId != undefined) {
+            query.ownerId = ownerId
         }
 
         if (pincode!=undefined) {

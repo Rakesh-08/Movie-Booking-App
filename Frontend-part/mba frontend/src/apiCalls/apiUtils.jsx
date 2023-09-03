@@ -13,6 +13,7 @@ let apiUrl = {
   fetchMovies: "/movieBooking/api/v1/movies",
   fetchUsers: "/movieBooking/api/v1/users",
   fetchTheatres: "/movieBooking/api/v1/theatres",
+  fetchMoviesInTheatre: "/movieBooking/api/v1/theatres/",
 };
 
 export default apiUrl;

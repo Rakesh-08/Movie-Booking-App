@@ -21,13 +21,12 @@ export default function MovieCard({MovieInfo}) {
       >
         <img
           src={MovieInfo.posterURL}
-          style={{ height: "80%" }}
+          style={{ height: "75%" }}
           className="card-img-top "
           alt="poster"
         ></img>
         <div style={{ lineHeight: "0.4" }} className="mx-2 ">
           <h6 className="card-title cardFont text-white  fs-6   ">
-            
             <p>({MovieInfo.releaseDate.slice(0, 4)})</p>
           </h6>
           <p >
@@ -35,16 +34,14 @@ export default function MovieCard({MovieInfo}) {
             {Array(Math.floor(MovieInfo.imdbRating.slice(0, 1) / 2))
               .fill()
               .map((i, index) => (
-                <span className="cardFont" key={index}>
-                  ⭐
+                <span className=" text-warning fs-4 m-1 cardFont" key={index}>
+                  ★
                 </span>
               ))}
           </p>
-
-
         </div>
       </div>
-    )
+    );
 }
 
 

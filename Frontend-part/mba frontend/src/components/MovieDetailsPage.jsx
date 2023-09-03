@@ -1,8 +1,21 @@
-import { useSelector } from "react-redux";
-import { useEffect,useState } from "react";
+import { useNavigate } from "react-router-dom"
 
 export default function MovieDetails() {
- let Movie= JSON.parse(localStorage.getItem("selectedMovie"));
+  let Movie = JSON.parse(localStorage.getItem("selectedMovie"));
+
+  let NavigateTo = useNavigate();
+  
+  let toBookingPage = () => {
+    
+    if (localStorage.getItem("mba_token")) {
+           NavigateTo("/Movie/booking")
+    } else {
+      alert("You need to login first to book tickets")
+      NavigateTo("/login")
+    }
+     
+  }
+
    
     return (
       <div>
@@ -77,8 +90,10 @@ export default function MovieDetails() {
           </div>
         </div>
 
-        <div className="">
-
+        <div className="d-flex text-center justify-content-center m-4 p-2">
+          <div><p>Wanted to watch in Theatre ?</p>
+          <input onClick={toBookingPage} type="button" className="btn btn-lg btn-outline-info w-100" value="Book Tickets"/></div>
+          
         </div>
       </div>
     );

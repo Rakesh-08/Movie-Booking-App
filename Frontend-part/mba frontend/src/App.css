@@ -3,8 +3,9 @@ body{
     color:white;
 }
 
-.hovereffect{
+.hovereffect:hover{
     cursor: pointer;
+    opacity: 0.4;
 }
 
 .authToggle:hover{

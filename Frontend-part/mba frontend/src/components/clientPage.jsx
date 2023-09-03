@@ -1,12 +1,54 @@
 import { useNavigate } from "react-router-dom";
 import MaterialTable from "@material-table/core";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import { getMoviesInTheatre, getTheatresOwned } from "../apiCalls/theatresApi";
 
 
 export default function ClientPage() {
-    let [theatres,setTheatres]= useState([])
+  let [theatres, setTheatres] = useState([]);
+  let [movies, setMovies] = useState([])
+  let NavigateTo = useNavigate();
 
-    let NavigateTo=useNavigate();
+  useEffect(() => {
+    init()
+  }, []);
+  
+  let init = async () => {
+    await getTheatres();
+    await getMovies();
+  }
+
+  let getTheatres = () => {
+    let id = localStorage.getItem("_id")
+    getTheatresOwned(id).then((response) => {
+      console.log(response)
+    }).catch(err => console.log(err));
+  }
+
+  let getMovies = () => {
+    console.log(theatres)
+    
+    theatres.map(theatre => {
+      getMoviesInTheatre(theatre._id).then((response) => {
+        console.log(response)
+      }).catch(err => console.log(err));
+    })
+  }
+
+
+  let moviesColumn = [
+    { title: "", field: "" },
+    { title: "", field: "" },
+    { title: "", field: "" },
+    { title: "", field: "" },
+    { title: "", field: "" },
+    { title: "", field: "" },
+    { title: "", field: "" },
+  ];
+
+ 
+  
+
     return (
       <div className="vh-100">
         <div className=" mx-4 p-2 ">
@@ -20,8 +62,8 @@ export default function ClientPage() {
           <div>
             <MaterialTable
               title="Movies running in your theatres"
-              column={theatreColumns}
-              data={theatres}
+              column={moviesColumn}
+              data={movies}
             />
             
           </div>
