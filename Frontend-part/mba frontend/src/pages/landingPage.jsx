@@ -1,9 +1,9 @@
 import { getAllMovies } from "../apiCalls/moviesApi";
-import MoviesCrousal from "./Crousal";
-import MovieCard from "./MovieCard";
-import Navbar from "./Navbar";
+import MoviesCrousal from "../components/Crousal";
+import MovieCard from "../components/MovieCard";
+import Navbar from "../components/Navbar";
 import { useState, useEffect } from "react";
-import Footer from "./footer";
+import Footer from "../components/footer";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import trailers from "/public/constants";
@@ -25,10 +25,7 @@ export default function HomeComponent() {
       
     } else {
       console.log("fetching")
-     
-    }  
-
-
+      }  
   }, [])
 
     

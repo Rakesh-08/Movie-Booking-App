@@ -69,32 +69,6 @@ let getAllMovies = async (req, res) => {
             query.genre = genre;
         }
 
-        // For fetching all movies from different theatres owned by a client
-
-        // let requester = await userModel.findOne({
-        //     userId:req.userId
-        // })
-
-        // if (requester && requester.userType == constants.userTypes.client) {
-            
-        //     let moviesInOwnedTheatres = await theatreModel.find({
-        //         ownerId:requester._id
-        //     }).select({ movies: 1 })
-
-        //     let temp = [];
-
-        //     moviesInOwnedTheatres.map(obj => temp.concat(obj.movies))
-            
-        //     let movies = await movieModel.find({
-        //         _id: {
-        //             $in:temp
-        //         }
-        //     })
-
-        //     return res.status(200).send(movies)
-            
-        // }
-
         let allMovies = await movieModel.find(query)
         
             res.status(200).send(allMovies)
@@ -127,6 +101,50 @@ let getMovieById = async (req, res) => {
         res.status(500).send({ message: "some internal server error occurred" })
     }
 
+}
+
+let getAllMoviesRunningInTheatreOwned = async (req,res) => {
+    
+    try {
+        // For fetching all movies from different theatres owned by a client
+
+        let requester = await userModel.findOne({
+            userId: req.userId
+        });
+
+        if (requester && requester.userType !== constants.userType.client) {
+            return res.status(401).send({
+                message:"Not authorized! only theatre owners are allowed"
+                })
+         }
+
+            let moviesInOwnedTheatres = await theatreModel.find({
+                ownerId: requester._id
+            }).select({ movies: 1 })
+
+           
+        let temp = []
+        
+
+        moviesInOwnedTheatres.map(({ movies }) => {
+          temp= temp.concat(movies)
+        })
+       
+            let movies = await movieModel.find({
+                _id: {
+                    $in: temp
+                }
+            })
+          
+
+            return res.status(200).send(movies)
+
+        
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ message: "some internal server error occurred" });
+    }
 }
 
 
@@ -175,5 +193,6 @@ module.exports = {
     updateMovie,
     getAllMovies,
     getMovieById,
-    deleteMovie
+    deleteMovie,
+    getAllMoviesRunningInTheatreOwned
 }

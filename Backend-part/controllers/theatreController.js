@@ -134,6 +134,8 @@ let getTheatreById = async (req, res) => {
         let theatre = await theatreModel.findOne({
             _id:req.params.theatreId
         })
+       
+       
 
         if (theatre) {
             res.status(200).send(theatre)
@@ -337,11 +339,12 @@ let removeMoviesFromTheatre = async (req, res) => {
 
 let getAllMoviesInTheatre = async (req, res) => {
     try {
-
+          
         let theatre = await theatreModel.findOne({
             _id: req.params.theatreId
-        }).select({ _id: 0, movies: 1 });
-
+        })
+        
+          
         if (!theatre) {
             return res.status(400).send({
                 message:"Invalid theatre id , no theatre exist with given id"

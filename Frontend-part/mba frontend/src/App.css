@@ -24,7 +24,7 @@ body{
      font-family:'Times New Roman', Times, serif;
      color:rgb(199, 197, 196)
 }
-@media  screen and (max-width:668px) {
+@media  screen and (max-width:763px) {
     .moviecard{
     width: 24vw !important;
     height:20vh !important;
@@ -34,7 +34,7 @@ body{
         font-size: 9px!important;
     }
     .moviecard img{
-        height:60% !important;
+        height:64% !important;
     }
     .cardFont{
         font-size: 70% !important;       

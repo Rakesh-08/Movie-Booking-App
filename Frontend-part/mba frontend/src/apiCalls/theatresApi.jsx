@@ -15,9 +15,6 @@ let getTheatresOwned = async (ownerId) => {
   );
 };
 
-let getMoviesInTheatre = async (theatreId) => {
-  
-  return await axios.get(apiUrl.Base_url + apiUrl.fetchMoviesInTheatre +  `${theatreId}/movies`,apiUrl.apiHeader);
-}
 
-export { getAllTheatresCall,getMoviesInTheatre,getTheatresOwned };
+
+export { getAllTheatresCall,getTheatresOwned };

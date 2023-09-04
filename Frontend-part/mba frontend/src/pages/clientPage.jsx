@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import MaterialTable from "@material-table/core";
 import { useState,useEffect } from "react";
-import { getMoviesInTheatre, getTheatresOwned } from "../apiCalls/theatresApi";
+import { getTheatresOwned } from "../apiCalls/theatresApi";
+import { getMoviesInTheatreOwned } from "../apiCalls/moviesApi";
 
 
 export default function ClientPage() {
@@ -14,26 +15,29 @@ export default function ClientPage() {
   }, []);
   
   let init = async () => {
-    await getTheatres();
-    await getMovies();
+    await getTheatres(); 
+    getMovies();
   }
 
   let getTheatres = () => {
+
     let id = localStorage.getItem("_id")
-    getTheatresOwned(id).then((response) => {
-      console.log(response)
-    }).catch(err => console.log(err));
+
+    getTheatresOwned(id)
+      .then((response) => {
+      setTheatres(response.data)
+      console.log(response.data)
+      }).
+      catch(err => console.log(err));
   }
 
   let getMovies = () => {
-    console.log(theatres)
-    
-    theatres.map(theatre => {
-      getMoviesInTheatre(theatre._id).then((response) => {
+     
+      getMoviesInTheatreOwned().then((response) => {
         console.log(response)
       }).catch(err => console.log(err));
-    })
-  }
+    }
+  
 
 
   let moviesColumn = [

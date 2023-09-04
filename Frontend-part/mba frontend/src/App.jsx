@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AuthComponent from './components/authComponent'
-import ErrorPage from './ErrorPage';
-import HomeComponent from './components/homeComponent';
-import AdminPage from './components/adminPage';
-import ClientPage from './components/clientPage';
-import MovieDetails from './components/MovieDetailsPage';
-import AllMoviesListByLang from './components/AllMoviesListByLanguage';
-import BookingPage from './components/bookingPage';
+import AuthComponent from './pages/loginPage'
+import ErrorPage from "./pages/ErrorPage";
+import HomeComponent from './pages/landingPage';
+import AdminPage from './pages/adminPage';
+import ClientPage from './pages/clientPage';
+import MovieDetails from './pages/MovieDetailsPage';
+import AllMoviesListByLang from './pages/AllMoviesListByLanguage';
+import BookingPage from './pages/bookingPage';
 
 function App() {
  
