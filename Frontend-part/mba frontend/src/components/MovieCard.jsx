@@ -27,7 +27,7 @@ export default function MovieCard({MovieInfo}) {
         ></img>
         <div style={{ lineHeight: "0.4" }} className="mx-2 ">
           <h6 className="card-title cardFont text-white  fs-6   ">
-            <p>({MovieInfo.releaseDate.slice(0, 4)})</p>
+            <p className="mb-0">({MovieInfo.releaseDate.slice(0, 4)})</p>
           </h6>
           <p >
             {" "}

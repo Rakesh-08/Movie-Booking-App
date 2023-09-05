@@ -24,9 +24,10 @@ body{
      font-family:'Times New Roman', Times, serif;
      color:rgb(199, 197, 196)
 }
+
 @media  screen and (max-width:763px) {
     .moviecard{
-    width: 24vw !important;
+    width: 28vw !important;
     height:20vh !important;
 
     }
@@ -83,4 +84,10 @@ height: 25vh!important;
 .authInput{
     width:90%;
 
+}
+
+.cinema{
+      display: grid;
+grid-template-columns: repeat(7,1fr);
+width: fit-content;
 }

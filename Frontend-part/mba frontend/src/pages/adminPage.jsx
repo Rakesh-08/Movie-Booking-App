@@ -4,7 +4,7 @@ import MaterialTable from "@material-table/core";
 import { getAllUsersCall } from "../apiCalls/usersApi";
 import { getAllTheatresCall } from "../apiCalls/theatresApi";
 import EmailIcon from "@mui/icons-material/Email";
-
+import { ExportCsv, ExportPdf } from "@material-table/exporters";
 
 
 
@@ -107,8 +107,20 @@ export default function AdminPage() {
                 ]}
                 options={{
                   actionsColumnIndex: -1,
+                  exportMenu: [
+                    {
+                      label: "Export as PDF",
+                      exportFunc: (cols, datas) =>
+                        ExportPdf(cols, datas, "Users Record"),
+                    },
+                    {
+                      label: "Export as ExcelFile",
+                      exportFunc: (cols, datas) =>
+                        ExportCsv(cols, datas, "Users Record"),
+                    },
+                  ],
                 }}
-              ></MaterialTable>
+              />
             </div>
           ) : (
             <div>
@@ -116,7 +128,22 @@ export default function AdminPage() {
                 title="List of Theatres"
                 columns={theatreColumns}
                 data={theatres}
-              ></MaterialTable>
+                options={{
+                  exportButton: true,
+                  exportMenu: [
+                    {
+                      label: "Export as PDF",
+                      exportFunc: (cols, datas) =>
+                        ExportPdf(cols, datas, "Theatres Record"),
+                    },
+                    {
+                      label: "Export as ExcelFile",
+                      exportFunc: (cols, datas) =>
+                        ExportCsv(cols, datas, "Theatres Record"),
+                    },
+                  ],
+                }}
+              />
             </div>
           )}
         </div>
