@@ -3,12 +3,12 @@ const movieModel = require("../models/movieModel");
 const theatreModel = require("../models/theatreModel");
 let userModel = require("../models/userModel");
 let constants = require("../utils/constants");
-
+let seatingModel = require("../models/seatingModel");
 
 let createBooking = async (req, res) => {
     try {
 
-        let { customerId, movieId, theatreId,NoOfTickets,selectedSeats } = req.body;
+        let { customerId, movieId, theatreId,NoOfTickets } = req.body;
 
         if (!customerId) {
             let user = await userModel.findOne({
@@ -29,7 +29,7 @@ let createBooking = async (req, res) => {
             NoOfTickets: NoOfTickets,
             pricePerTicket:moviePrice.price
         })
-
+           
        
             res.status(200).send(booking)
         
@@ -186,10 +186,43 @@ let deleteBooking = async (req, res) => {
     }
 }
 
+let getSeatingPlan = async (req, res) => {
+    try {
+        let { theatreId, shift } = req.body;
+       
+        let seatingArrng = await seatingModel.findOne({
+            theatreId: theatreId,
+            shift: shift,
+            createdAt: {
+                $regex: new Date().toJSON.slice(0, 10)
+            }
+        });
+
+        if (seatingArrng) {
+            return res.status(200).send(seatingArrng)
+        }
+
+        let createSeating = await seatingModel.create({
+            theatreId: theatreId,
+            shift: shift,     
+        })
+
+        res.status(200).send(createSeating)
+          
+        
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({
+            message: "some internal server error occurred"
+        })
+    }
+}
+
 module.exports = {
     createBooking,
     updateBooking,
     getAllBooking,
     getBookingById,
-    deleteBooking
+    deleteBooking,
+    getSeatingPlan
 }

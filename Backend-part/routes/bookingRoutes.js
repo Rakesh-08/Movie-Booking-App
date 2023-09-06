@@ -5,7 +5,8 @@ let {
     updateBooking,
     getAllBooking,
     getBookingById,
-    deleteBooking
+    deleteBooking,
+    getSeatingPlan
 } = require("../controllers/bookingController");
 const { verifyToken,authValidatorForBooking } = require("../middlewares/authJwt")
 let bookingValidator=require("../middlewares/validateBooking")
@@ -16,7 +17,9 @@ module.exports = (app) => {
     app.put("/movieBooking/api/v1/booking/:bookingId", [verifyToken,authValidatorForBooking], updateBooking)
     app.get("/movieBooking/api/v1/booking", [verifyToken], getAllBooking)
     app.get("/movieBooking/api/v1/booking/:bookingId", [verifyToken, authValidatorForBooking], getBookingById)
-    app.delete("/movieBooking/api/v1/booking/:bookingId", [verifyToken, authValidatorForBooking], deleteBooking)
+    app.delete("/movieBooking/api/v1/booking/:bookingId", [verifyToken, authValidatorForBooking], deleteBooking);
+
+    app.get("/movieBooking/api/v1/seats",verifyToken, getSeatingPlan)
 }
 
 

@@ -3,11 +3,12 @@ const bookingModel = require("../models/bookingModel");
 let paymentModel = require("../models/paymentModel");
 let theatreModel = require("../models/theatreModel");
 let sendEmail = require("../utils/notificationClient");
+let seatingModel = require("../models/seatingModel");
 
 
 let createPayment = async (req, res, next) => {
     try {
-        let { bookingId} = req.body;
+        let { bookingId,selectedSeats,shift} = req.body;
 
         let booking = await bookingModel.findOne({
             _id:bookingId
@@ -43,6 +44,17 @@ let createPayment = async (req, res, next) => {
             amount: amount,
             paymentStatus:constants.paymentStatus.success
         })
+
+        let seatingArrng = await seatingModel.findOne({
+            theatreId: theatre._id,
+            shift: shift,
+            createdAt: {
+                $regex: new Date().toJSON.slice(0, 10)
+            }
+        });
+
+        seatingArrng.occupiedSeats.push(...selectedSeats);
+        await seatingArrng.save();
 
         booking.status = constants.bookingStatus.completed;
         await booking.save();

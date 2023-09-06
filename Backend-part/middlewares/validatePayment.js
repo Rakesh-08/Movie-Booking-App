@@ -10,6 +10,11 @@ module.exports = async (req, res, next) => {
             message:"please pass the booking id for which payment need to be done"
         })
     }
+    if (!req.body.selectedSeats) {
+        return res.status(400).send({
+            message: "please pass the seats selected by customer"
+        })
+    }
 
 
     next()
