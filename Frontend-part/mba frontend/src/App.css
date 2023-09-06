@@ -50,6 +50,9 @@ body{
 .sidebar{
     display: block !important;
 }
+  .responsive{
+    display: block!important;
+  }
 .offcanvas{
     background-color: gray;
     color:white;

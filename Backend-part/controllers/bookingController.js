@@ -8,7 +8,7 @@ let constants = require("../utils/constants");
 let createBooking = async (req, res) => {
     try {
 
-        let { customerId, movieId, theatreId,NoOfTickets } = req.body;
+        let { customerId, movieId, theatreId,NoOfTickets,selectedSeats } = req.body;
 
         if (!customerId) {
             let user = await userModel.findOne({
@@ -22,20 +22,12 @@ let createBooking = async (req, res) => {
             _id: movieId
         }).select({ _id: 0, price: 1 });
 
-
-        let theatrePrice = await theatreModel.findOne({
-            _id: theatreId
-        }).select({ _id: 0, basePrice: 1 });
-
-        let finalPricePerTicket= theatrePrice.basePrice + moviePrice.price
-
-
         let booking = await bookingModel.create({
             customerId: customerId,
             theatreId: theatreId,
             movieId: movieId,
             NoOfTickets: NoOfTickets,
-            pricePerTicket:finalPricePerTicket
+            pricePerTicket:moviePrice.price
         })
 
        

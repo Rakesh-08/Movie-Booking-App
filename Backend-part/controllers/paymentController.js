@@ -1,6 +1,7 @@
 let constants= require("../utils/constants")
 const bookingModel = require("../models/bookingModel");
 let paymentModel = require("../models/paymentModel");
+let theatreModel = require("../models/theatreModel");
 let sendEmail = require("../utils/notificationClient");
 
 
@@ -31,7 +32,11 @@ let createPayment = async (req, res, next) => {
             })
         }
 
-        let amount= (booking.NoOfTickets)*(booking.pricePerTicket)
+        let theatre = await theatreModel.findOne({
+            _id:booking.theatreId
+        })
+
+        let amount= (booking.NoOfTickets)*(booking.pricePerTicket) + theatre.basePrice 
 
         let payment = await paymentModel.create({
             bookingId: bookingId,

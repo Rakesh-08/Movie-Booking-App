@@ -28,7 +28,7 @@ export default function Footer() {
             href="#!"
             role="button"
           >
-           <FacebookIcon/>
+            <FacebookIcon />
           </MDBBtn>
 
           <MDBBtn
@@ -39,7 +39,7 @@ export default function Footer() {
             href="#!"
             role="button"
           >
-            <TwitterIcon/>
+            <TwitterIcon />
           </MDBBtn>
 
           <MDBBtn
@@ -50,7 +50,7 @@ export default function Footer() {
             href="#!"
             role="button"
           >
-            <InstagramIcon/>
+            <InstagramIcon />
           </MDBBtn>
 
           <MDBBtn
@@ -61,7 +61,7 @@ export default function Footer() {
             href="#!"
             role="button"
           >
-            <GoogleIcon/>
+            <GoogleIcon />
           </MDBBtn>
 
           <MDBBtn
@@ -72,7 +72,7 @@ export default function Footer() {
             href="#!"
             role="button"
           >
-            <GitHubIcon/>
+            <GitHubIcon />
           </MDBBtn>
         </section>
 
@@ -161,7 +161,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a href="#!" className="text-white">
-                    Link 4
+                    Licences and Rights
                   </a>
                 </li>
               </ul>
@@ -173,49 +173,22 @@ export default function Footer() {
               <ul className="list-unstyled mb-0">
                 <li>
                   <a href="#!" className="text-white">
-                    Link 1
+                    Rakesh Mandal
                   </a>
                 </li>
                 <li>
                   <a href="#!" className="text-white">
-                    Link 2
+                    Rakesh Mandal
                   </a>
                 </li>
                 <li>
                   <a href="#!" className="text-white">
-                    Link 3
+                    Rakesh Mandal
                   </a>
                 </li>
                 <li>
                   <a href="#!" className="text-white">
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </MDBCol>
-
-            <MDBCol lg="3" md="6" className="mb-4 mb-md-0">
-              <h5 className="text-uppercase">Links</h5>
-
-              <ul className="list-unstyled mb-0">
-                <li>
-                  <a href="#!" className="text-white">
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-white">
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-white">
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-white">
-                    Link 4
+                    Rakesh Mandal
                   </a>
                 </li>
               </ul>
