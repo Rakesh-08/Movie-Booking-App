@@ -29,8 +29,10 @@ export default function BookingPage() {
   useEffect(() => {
     if (!localStorage.getItem('mba_token')) {
         NavigateTo("/login")
+    } else {
+       getTheatres();
     }
-    getTheatres();
+   
 
   }, []);
 
@@ -108,8 +110,8 @@ export default function BookingPage() {
     setShowSeats(true)
   }
 
-   let getTheatres =async () => {
-    await getAllTheatresCall()
+   let getTheatres = () => {
+     getAllTheatresCall()
        .then((response) => {
          setTheatres(response.data);
        })

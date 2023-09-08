@@ -8,7 +8,8 @@ let seatingModel = require("../models/seatingModel");
 let createBooking = async (req, res) => {
     try {
 
-        let { customerId, movieId, theatreId,NoOfTickets } = req.body;
+        let { customerId, movieId, theatreId, NoOfTickets,Timing } = req.body;
+        
 
         if (!customerId) {
             let user = await userModel.findOne({
@@ -25,6 +26,7 @@ let createBooking = async (req, res) => {
         let booking = await bookingModel.create({
             customerId: customerId,
             theatreId: theatreId,
+            Timing:Timing,
             movieId: movieId,
             NoOfTickets: NoOfTickets,
             pricePerTicket:moviePrice.price
@@ -187,12 +189,13 @@ let deleteBooking = async (req, res) => {
 let getSeatingPlan = async (req, res) => {
     try {
         let { theatreId, shift } = req.body;
-       
+
+        
         let seatingArrng = await seatingModel.findOne({
             theatreId: theatreId,
             shift: shift,
             createdAt: {
-                $regex: new Date().toJSON.slice(0, 10)
+                $gte: new Date().setHours(0,0,0)
             }
         });
 

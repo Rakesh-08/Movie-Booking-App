@@ -4,11 +4,11 @@ let paymentModel = require("../models/paymentModel");
 let theatreModel = require("../models/theatreModel");
 let sendEmail = require("../utils/notificationClient");
 let seatingModel = require("../models/seatingModel");
-
+let userModel = require("../models/userModel");
 
 let createPayment = async (req, res, next) => {
     try {
-        let { bookingId,selectedSeats,shift} = req.body;
+        let { bookingId,selectedSeats} = req.body;
 
         let booking = await bookingModel.findOne({
             _id:bookingId
@@ -20,11 +20,13 @@ let createPayment = async (req, res, next) => {
             })
         }
 
-        let bookingTime = booking.createdAt;
-        let currentTime = Date.now();
+        let bookingTime = new Date(booking.createdAt).getTime();
+        let currentTime = Date.now()
 
-        let diff = Math.floor((currentTime - bookingTime) / 1000 * 60)
         
+
+        let diff = Math.floor((currentTime - bookingTime) / (1000 * 60))
+       
         if (diff > 5) {
             booking.status = constants.bookingStatus.expired;
             await booking.save();
@@ -47,9 +49,9 @@ let createPayment = async (req, res, next) => {
 
         let seatingArrng = await seatingModel.findOne({
             theatreId: theatre._id,
-            shift: shift,
+            shift: booking.Timing,
             createdAt: {
-                $regex: new Date().toJSON.slice(0, 10)
+                $gte:new Date().setHours(0,0,0)
             }
         });
 
