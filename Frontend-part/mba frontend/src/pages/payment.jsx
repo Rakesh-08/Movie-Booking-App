@@ -12,19 +12,32 @@ export default function PaymentPage() {
   let [flag, setFlag] = useState(false);
   let [showSpinner, setShowSpinner] = useState(false);
     let NavigateTo = useNavigate();
-    let booking= useSelector(state=>state.moviesList.bookingInfo)
+  let booking = useSelector(state => state.moviesList.bookingInfo);
+
+ 
 
   let totalPrice = booking.pricePerTicket * booking.totalTickets + booking.theatreCharges - booking.discount;
 
   let makePaymentFn = () => {
     
     setShowSpinner(true);
+    let temp = {
+      bookingId: booking.bookingId,
+      selectedSeats:booking.seats
+    }
 
-    createPayment().then(response => {
+    createPayment(temp).then(response => {
       console.log(response)
-    }).catch(err => console.log(err));
+      setShowSpinner(false);
+      setFlag(true);
+      setShowPaymentStatus(true)
+    }).catch(err => {
+      console.log(err)
+      setShowSpinner(false);
+      setShowPaymentStatus(true);
+    });
 
-    setShowSpinner((prevState)=>setShowSpinner(!prevState))
+   
 
   }
   
@@ -101,7 +114,7 @@ export default function PaymentPage() {
                     </p>
                     <p>
                       Seats:{" "}
-                      <span className="text-secondary">{booking.seats}</span>
+                      <span className="text-secondary">{booking.seats.join(",")}</span>
                     </p>
                     <p>
                       Price per ticket{" "}

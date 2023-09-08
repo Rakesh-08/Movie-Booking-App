@@ -50,6 +50,7 @@ let createPayment = async (req, res, next) => {
         let seatingArrng = await seatingModel.findOne({
             theatreId: theatre._id,
             shift: booking.Timing,
+            movieId:booking.movieId,
             createdAt: {
                 $gte:new Date().setHours(0,0,0)
             }

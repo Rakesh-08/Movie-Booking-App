@@ -12,6 +12,10 @@ let seatSchema = new mongoose.Schema({
     shift: {
         type: String,
         required:true
+    },
+    movieId: {
+        type: mongoose.SchemaTypes.ObjectId,
+        required:true
     }
 ,
     totalSeats: {

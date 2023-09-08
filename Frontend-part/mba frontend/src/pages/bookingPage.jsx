@@ -39,32 +39,40 @@ export default function BookingPage() {
 
   let proceedPayment = () => {
 
-    dispatch({
-      type: "booking",
-      payload: {
-        movie: MovieSelected.name,
-        theatre: bookingInfo.theatre,
-        timing: bookingInfo.timing,
-        totalTickets: seats.selected.length,
-        seats: seats.selected.join(","),
-        pricePerTicket: MovieSelected.price,
-        theatreCharges: theatres.find((tht) => tht.name == bookingInfo.theatre)
-          .basePrice,
-        discount: discount
-      }
-    });
-
     let temp = {
       movieId: MovieSelected._id,
       theatreId: theatres.find((item) => item.name == bookingInfo.theatre)._id,
-      NoOfTickets:seats.selected.length
+      NoOfTickets: seats.selected.length,
+      Timing: bookingInfo.timing
     };
 
     postBooking(temp).then((response) => {
       console.log(response);
-    }).catch(err=>console.log(err))
+       dispatch({
+         type: "booking",
+         payload: {
+           movie: MovieSelected.name,
+           theatre: bookingInfo.theatre,
+           timing: bookingInfo.timing,
+           totalTickets: seats.selected.length,
+           seats: seats.selected,
+           pricePerTicket: MovieSelected.price,
+           theatreCharges: theatres.find(
+             (tht) => tht.name == bookingInfo.theatre
+           ).basePrice,
+           discount: discount,
+           bookingId: response.data._id,
+         },
+       });
+      
+      
+    NavigateTo("/payment");
+    }).catch(err => {
+      console.log(err)
+       alert(err.response.data.message)
+    }
+      )
 
-    NavigateTo("/payment")
   }
 
   let seatClick = (seatNo) => {
@@ -93,6 +101,7 @@ export default function BookingPage() {
     
   }
 
+
   let fetchSeats = () => {
     if (!bookingInfo.theatre || !bookingInfo.timing) {
       return alert("Please first select the theatre and timing to check seats availability")
@@ -100,15 +109,22 @@ export default function BookingPage() {
 
     let temp = {
       theatreId: theatres.find(item => item.name == bookingInfo.theatre)._id,
-      shift:bookingInfo.timing
+      shift: bookingInfo.timing,
+      movieId:MovieSelected._id
     }
 
     fetchSeatsInTheatre(temp).then((response) => {
-      console.log(response.data)
+              
+        
+      setSeats({ ...seats, occupied: response.data.occupiedSeats });
+      
     }).catch(err => console.log(err))
     
     setShowSeats(true)
   }
+
+
+  // fetch only those theatres that is currently running this movie
 
    let getTheatres = () => {
      getAllTheatresCall()

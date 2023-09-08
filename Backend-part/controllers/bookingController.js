@@ -188,12 +188,13 @@ let deleteBooking = async (req, res) => {
 
 let getSeatingPlan = async (req, res) => {
     try {
-        let { theatreId, shift } = req.body;
+        let { theatreId, shift,movieId } = req.body;
 
         
         let seatingArrng = await seatingModel.findOne({
             theatreId: theatreId,
             shift: shift,
+            movieId: movieId,
             createdAt: {
                 $gte: new Date().setHours(0,0,0)
             }
@@ -205,7 +206,8 @@ let getSeatingPlan = async (req, res) => {
 
         let createSeating = await seatingModel.create({
             theatreId: theatreId,
-            shift: shift,     
+            shift: shift,    
+            movieId:movieId
         })
 
         res.status(200).send(createSeating)
