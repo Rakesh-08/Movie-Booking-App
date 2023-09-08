@@ -11,7 +11,7 @@ export default function MovieCard({MovieInfo}) {
       <div
         onClick={() => {
           localStorage.setItem("selectedMovie", JSON.stringify(MovieInfo));
-          NavigateTo("/Movies/Details");
+          NavigateTo("/Movie/Details");
         }}
         style={{
           width: "20vw",

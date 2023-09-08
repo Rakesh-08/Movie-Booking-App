@@ -29,10 +29,8 @@ let createBooking = async (req, res) => {
             NoOfTickets: NoOfTickets,
             pricePerTicket:moviePrice.price
         })
-           
-       
+              
             res.status(200).send(booking)
-        
         
     }
     catch (err) {

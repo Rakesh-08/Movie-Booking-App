@@ -9,6 +9,7 @@ import ClientPage from './pages/clientPage';
 import MovieDetails from './pages/MovieDetailsPage';
 import AllMoviesListByLang from './pages/AllMoviesListByLanguage';
 import BookingPage from './pages/bookingPage';
+import PaymentPage from './pages/payment';
 
 function App() {
  
@@ -20,8 +21,9 @@ function App() {
         <Route path="/Error" element={<ErrorPage />}></Route>
         <Route path="/ADMIN" element={<AdminPage />}></Route>
         <Route path="/CLIENT" element={<ClientPage />}></Route>
-        <Route path="/Movies/Details" element={<MovieDetails />}></Route>
-        <Route path="/Movie/booking" element={<BookingPage/>}></Route>
+        <Route path="/Movie/Details" element={<MovieDetails />}></Route>
+        <Route path="/Movie/booking" element={<BookingPage />}></Route>
+        <Route path="/payment" element={<PaymentPage/>}></Route>
         <Route path="/Movies" element={<AllMoviesListByLang/> }></Route>
       </Routes>
     </BrowserRouter>

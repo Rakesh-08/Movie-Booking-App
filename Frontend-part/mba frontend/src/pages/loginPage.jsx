@@ -157,7 +157,7 @@ export default function AuthComponent() {
               <label>UserId</label>
             </div>
             <div className="d-flex m-1">
-              <div className="form-floating authInput text-dark ">
+              <div className="form-floating w-100  text-dark ">
                 <input
                   required
                   id="floatingPassword"

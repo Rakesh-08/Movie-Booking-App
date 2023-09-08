@@ -9,11 +9,17 @@ let getAllTheatresCall = async () => {
 };
 
 let getTheatresOwned = async (ownerId) => {
+  let temp = await apiUrl.apiHeader;
+
   return await axios.get(
     apiUrl.Base_url + apiUrl.fetchTheatres+`?ownerId=${ownerId}`,
-    apiUrl.apiHeader
+    temp
   );
 };
+
+let fetchSeatsInTheatre = async () => {
+  return await axios.get()
+}
 
 
 

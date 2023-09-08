@@ -15,16 +15,20 @@ export default function HomeComponent() {
  
   let NavigateTo = useNavigate();
   let dispatch = useDispatch();
-   let moviesList=useSelector(state=>state.moviesList.allMovies);
+  //  let moviesList=useSelector(state=>state.moviesList.allMovies);
+
+  let moviesList = localStorage.getItem("moviesList") ? JSON.parse(localStorage.getItem("moviesList")) : [];
 
   useEffect(() => {
     
-     fetchAllMovies();
-    if (localStorage.getItem("moviesList")==1) {
-      console.log("cached")
+     
+    if (localStorage.getItem("fetched")==1) {
+      console.log("cached");
+      setLoading(false);
       
     } else {
       console.log("fetching")
+      fetchAllMovies();
       }  
   }, [])
 
@@ -32,11 +36,12 @@ export default function HomeComponent() {
     let fetchAllMovies = () => {
       getAllMovies().then((response) => {
    
-        localStorage.setItem("moviesList", 1)
+        localStorage.setItem("fetched", 1)
+        localStorage.setItem("moviesList", JSON.stringify(response.data));
      
-       dispatch({type:"SET_MOVIESLIST",
-         payload: response.data
-       })
+      //  dispatch({type:"SET_MOVIESLIST",
+      //    payload: response.data
+      //  })
             setLoading(false)
             }
         ).catch((err) => {console.log(err);});

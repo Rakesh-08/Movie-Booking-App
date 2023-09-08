@@ -19,7 +19,7 @@ module.exports = (app) => {
     app.get("/movieBooking/api/v1/booking/:bookingId", [verifyToken, authValidatorForBooking], getBookingById)
     app.delete("/movieBooking/api/v1/booking/:bookingId", [verifyToken, authValidatorForBooking], deleteBooking);
 
-    app.get("/movieBooking/api/v1/seats",verifyToken, getSeatingPlan)
+    app.post("/movieBooking/api/v1/seats",verifyToken, getSeatingPlan)
 }
 
 

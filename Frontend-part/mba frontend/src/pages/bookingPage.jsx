@@ -2,6 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { getAllTheatresCall } from "../apiCalls/theatresApi";
 import { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { fetchSeatsInTheatre, postBooking } from "../apiCalls/booking";
+
+
 
 let cinema = new Array(56).fill().map((_, index) => index + 1);
 let discount= 0;
@@ -15,23 +19,50 @@ export default function BookingPage() {
   });
   let [showSeats, setShowSeats] = useState(false);
   let [seats, setSeats] = useState({ available: 56 - (OccupiedSeats.length), occupied: OccupiedSeats, selected: [] });
-  let [showPreview,setShowPreview]=useState(false)
+  
 
   let NavigateTo = useNavigate();
+  let dispatch= useDispatch();
   let MovieSelected = JSON.parse(localStorage.getItem('selectedMovie'));
 
    
   useEffect(() => {
+    if (!localStorage.getItem('mba_token')) {
+        NavigateTo("/login")
+    }
     getTheatres();
-  }, []);
 
-  let totalPrice =
-    MovieSelected.price * seats.selected.length +
-    theatres.find((tht) => tht.name == bookingInfo.theatre)?.basePrice- discount
+  }, []);
 
 
   let proceedPayment = () => {
-     alert("Link any payment gateway for payment and complete customer payment request")
+
+    dispatch({
+      type: "booking",
+      payload: {
+        movie: MovieSelected.name,
+        theatre: bookingInfo.theatre,
+        timing: bookingInfo.timing,
+        totalTickets: seats.selected.length,
+        seats: seats.selected.join(","),
+        pricePerTicket: MovieSelected.price,
+        theatreCharges: theatres.find((tht) => tht.name == bookingInfo.theatre)
+          .basePrice,
+        discount: discount
+      }
+    });
+
+    let temp = {
+      movieId: MovieSelected._id,
+      theatreId: theatres.find((item) => item.name == bookingInfo.theatre)._id,
+      NoOfTickets:seats.selected.length
+    };
+
+    postBooking(temp).then((response) => {
+      console.log(response);
+    }).catch(err=>console.log(err))
+
+    NavigateTo("/payment")
   }
 
   let seatClick = (seatNo) => {
@@ -63,18 +94,28 @@ export default function BookingPage() {
   let fetchSeats = () => {
     if (!bookingInfo.theatre || !bookingInfo.timing) {
       return alert("Please first select the theatre and timing to check seats availability")
+    };
+
+    let temp = {
+      theatreId: theatres.find(item => item.name == bookingInfo.theatre)._id,
+      shift:bookingInfo.timing
     }
+
+    fetchSeatsInTheatre(temp).then((response) => {
+      console.log(response.data)
+    }).catch(err => console.log(err))
+    
     setShowSeats(true)
   }
 
-
-   let getTheatres = () => {
-     getAllTheatresCall()
+   let getTheatres =async () => {
+    await getAllTheatresCall()
        .then((response) => {
          setTheatres(response.data);
        })
        .catch((err) => console.log(err));
-   };
+  };
+  
     return (
       <div
         style={{
@@ -112,6 +153,7 @@ export default function BookingPage() {
                 if (e.target.value == "Select") {
                   e.target.value = "";
                 }
+                setShowSeats(false)
                 setBookingInfo({ ...bookingInfo, theatre: e.target.value });
               }}
               className="m-2"
@@ -140,6 +182,7 @@ export default function BookingPage() {
                 if (e.target.value == "Select") {
                   e.target.value = "";
                 }
+                setShowSeats(false);
                 setBookingInfo({ ...bookingInfo, timing: e.target.value });
               }}
               className="m-1"
@@ -169,37 +212,37 @@ export default function BookingPage() {
             <div className="m-2 p-2 d-flex justify-content-evenly align-items-center responsive">
               <div>
                 <SeatLabel
-                  color="white"
+                  color="secondary"
                   label="Available"
-                  value={seats.available}
+                  
                 />
                 <SeatLabel
                   color="danger"
                   label="Occupied"
-                  value={seats.occupied.length}
+                
                 />
                 <SeatLabel
                   color="primary"
                   label="Selected"
-                  value={seats.selected.length}
+                 
                 />
               </div>
               <div>
-                <p className=" fs-5 m-2">Select Tickets:</p>
-                <div className="cinema">
+                <p className=" text-center fs-5 m-2">Select Tickets:</p>
+                <div className="cinema mt-3">
                   {cinema.map((seat, i) => (
                     <button
                       onClick={() => seatClick(seat)}
-                      className={`m-1 ${
+                      style={{width:"20px",height:"20px"}}
+                      className={`m-1  ${
                         seats.occupied.includes(seat)
                           ? "bg-danger"
                           : seats.selected.includes(seat)
-                          ? "bg-primary"
-                          : "bg-light"
+                          ? "bg-primary rounded-3"
+                          : "bg-secondary"
                       } `}
                       key={i}
                     >
-                      {seat}
                     </button>
                   ))}
                 </div>
@@ -207,15 +250,10 @@ export default function BookingPage() {
             </div>
 
             {seats.selected.length > 0 && (
-              <div className="mx-5 p-4">
-                <p className="p-1 text-warning fst-italic">{`You have selected ${seats.selected.length} tickets at a price of Rs. ${MovieSelected.price} each`}</p>
+              <div className=" p-4 text-center">
+                <p className="p-1 text-warning fst-italic">You have selected <span className="text-light">{seats.selected.length}</span> tickets at a price of Rs. <span className="text-light">{MovieSelected.price}</span> each</p>
                 <div>
-                  <button
-                    onClick={() => setShowPreview(true)}
-                    className="btn btn-info btn-sm m-1"
-                  >
-                    Preview of Booking
-                  </button>
+                  
                   <button
                     onClick={proceedPayment}
                     className="btn m-1 btn-outline-primary"
@@ -228,112 +266,17 @@ export default function BookingPage() {
           </>
         )}
 
-        {showPreview && (
-          <div>
-            <Modal
-              show={showPreview}
-              onHide={() => setShowPreview(false)}
-              centered
-              size="sm"
-              backdrop="static"
-            >
-              {" "}
-              <Modal.Header className="text-dark fs-5">
-                Booking Preview
-              </Modal.Header>
-              <Modal.Body className="p-2 text-dark d-flex flex-column align-items-center">
-                <div className="m-2 p-2">
-                  <p>
-                    Movie:{" "}
-                    <span className="text-secondary">{MovieSelected.name}</span>
-                  </p>
-                  <p>
-                    Theatre:{" "}
-                    <span className="text-secondary">
-                      {bookingInfo.theatre}
-                    </span>
-                  </p>
-                  <p>
-                    Timing:{" "}
-                    <span className="text-secondary">{bookingInfo.timing}</span>
-                  </p>
-                  <p>
-                    Total tickets:{" "}
-                    <span className="text-secondary">
-                      {seats.selected.length}
-                    </span>
-                  </p>
-                  <p>
-                    Seats:{" "}
-                    <span className="text-secondary">
-                      {seats.selected.join(",")}
-                    </span>
-                  </p>
-                  <p>
-                    Price per ticket{" "}
-                    <span className="text-secondary">
-                      {" "}
-                      &#8377; {MovieSelected.price}
-                    </span>
-                  </p>
-                  <p>
-                    Theatre Charges :{" "}
-                    <span className="text-secondary">
-                      {" "}
-                      &#8377;{" "}
-                      {
-                        theatres.find((tht) => tht.name == bookingInfo.theatre)
-                          .basePrice
-                      }
-                    </span>
-                  </p>
-                  <p>
-                    Discount :{" "}
-                    <span className="text-secondary"> &#8377; {discount}</span>
-                  </p>
-                  <div className="m-2  border-top p-1">
-                    <p className="lead">
-                      Total amount
-                      <span className="mx-3"> &#8377;{totalPrice}</span>
-                    </p>
-                    <p>{`(${
-                      MovieSelected.price} * ${seats.selected.length} +
-                      ${theatres.find((tht) => tht.name == bookingInfo.theatre)
-                        .basePrice} -
-                      ${discount})
-                    `}</p>
-                  </div>
-
-                  <div>
-                    <button
-                      onClick={() => setShowPreview(false)}
-                      className="btn btn-sm m-1 btn-secondary"
-                    >
-                      back
-                    </button>
-                    <button
-                      onClick={proceedPayment}
-                      className="btn btn-sm m-1 btn-primary"
-                    >
-                      proceed to payment
-                    </button>
-                  </div>
-                </div>
-              </Modal.Body>
-            </Modal>
-          </div>
-        )}
       </div>
     );
 }
 
-let SeatLabel = ({color,label,value}) => {
+let SeatLabel = ({color,label}) => {
   return (
     <div className="m-3">
       
       <button className={`btn btn-sm bg-${color}`}></button>
       <div>
-          {label} <span className="mx-2">{value}</span>
+          {label} 
       </div> 
 
     </div>

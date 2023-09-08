@@ -4,7 +4,8 @@ import { combineReducers } from "redux"
 let initState = {
    
     allMovies: [],
-    moviesByLanguage:[]
+  moviesByLanguage: [],
+  bookingInfo:{}
 }
 
 let movieReducer = (state = initState, action) => {
@@ -14,9 +15,13 @@ let movieReducer = (state = initState, action) => {
         let result = { ...state, allMovies: action.payload };
         return result;
       case "movies":
-            let temp = { ...state, moviesByLanguage: action.payload };
+        let temp = { ...state, moviesByLanguage: action.payload };
+        
         return temp;
-
+      case "booking":
+         let booking = { ...state, bookingInfo: action.payload };
+        
+        return booking;
       default:
         return state;
     }

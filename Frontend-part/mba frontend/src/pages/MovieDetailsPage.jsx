@@ -10,8 +10,9 @@ export default function MovieDetails() {
     if (localStorage.getItem("mba_token")) {
            NavigateTo("/Movie/booking")
     } else {
-      alert("You need to login first to book tickets")
+      alert("You need to login first to book tickets");
       NavigateTo("/login")
+      
     }
      
   }
@@ -39,16 +40,20 @@ export default function MovieDetails() {
         </div>
 
         <div className="pt-5 castDetails  d-flex  justify-content-center m-4">
-          <div className=" p-4  text-center ">
+          <div className=" p-4   text-center ">
             <img
-              style={{ width: "40%", height: "23vh" }}
+              
+              style={{ width: "50%", height: "23vh" }}
               src={Movie.posterURL}
               alt="Movie"
             />
-            <button onClick={()=>alert(`${Movie.name} added to your watch list`)} className="btn  btn-outline-warning m-5">
+            <div>
+                <button onClick={()=>alert(`${Movie.name} added to your watch list`)} className="btn  btn-outline-warning m-5">
               {" "}
               ❤️ Add To WatchList
             </button>
+            </div>
+          
           </div>
           <div
             style={{ backgroundColor: "rgb(63, 62, 62)",height:"17rem" }}
@@ -91,8 +96,15 @@ export default function MovieDetails() {
         </div>
 
         <div className="d-flex text-center justify-content-center m-4 p-2">
-          <div><p>Wanted to watch in Theatre ?</p>
-          <input onClick={toBookingPage} type="button" className="btn btn-lg btn-outline-info w-100" value="Book Tickets"/></div>
+          <div>
+            
+            {Movie.releaseStatus === "RELEASED" ?
+              <>
+                <p>Wanted to watch in Theatre ?</p>
+                <input onClick={toBookingPage} type="button" className="btn btn-lg btn-outline-info w-100" value="Book Tickets" />
+              </>
+               : <><h4>... coming soon in theatres</h4></>}
+          </div>
           
         </div>
       </div>

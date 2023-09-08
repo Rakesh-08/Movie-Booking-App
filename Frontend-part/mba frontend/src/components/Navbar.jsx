@@ -49,7 +49,7 @@ export default function Navbar(props) {
 
           <div
             style={{ position: "absolute", zIndex: "888" }}
-            className="bg-light text-dark "
+            className="bg-light text-dark w-50 rounded  "
           >
             {props.movies
               .filter((movie) => {
@@ -85,12 +85,14 @@ export default function Navbar(props) {
         {localStorage.getItem("mba_token") ? (
           <div className="my-3 ">
             <span className="mx-3"> Hi {localStorage.getItem("Name")}</span>
-            <button
+            {localStorage.getItem("userType") !== "CUSTOMER" &&
+              <button
               onClick={() => NavigateTo(`/${localStorage.getItem("userType")}`)}
               className="border-0 mx-2 bg-secondary text-info"
             >
               {localStorage.getItem("userType")}
-            </button>
+            </button>}
+          
 
             <button onClick={LogoutFn} className="btn mx-2 btn-outline-danger">
               Logout
@@ -123,14 +125,17 @@ export default function Navbar(props) {
               {localStorage.getItem("mba_token") ? (
                 <div className="my-3  ">
                   <div className="m-2"> Hi {localStorage.getItem("Name")}</div>
-                  <div
+
+                  {localStorage.getItem("userType") !== "CUSTOMER" &&
+                    <div
                     onClick={() =>
                       NavigateTo(`/${localStorage.getItem("userType")}`)
                     }
                     className="m-2 hovereffect text-info"
                   >
                     {localStorage.getItem("userType")}
-                  </div>
+                  </div>}
+                  
 
                   <button
                     onClick={LogoutFn}
