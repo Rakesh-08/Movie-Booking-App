@@ -189,7 +189,7 @@ let deleteBooking = async (req, res) => {
 let getSeatingPlan = async (req, res) => {
     try {
         let { theatreId, shift,movieId } = req.body;
-
+console.log(movieId)
         
         let seatingArrng = await seatingModel.findOne({
             theatreId: theatreId,
@@ -209,6 +209,8 @@ let getSeatingPlan = async (req, res) => {
             shift: shift,    
             movieId:movieId
         })
+
+        console.log(createSeating)
 
         res.status(200).send(createSeating)
           
