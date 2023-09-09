@@ -32,8 +32,7 @@ export default function BookingPage() {
     } else {
        getTheatres();
     }
-   
-
+  
   }, []);
 
 
@@ -115,7 +114,7 @@ export default function BookingPage() {
 
     fetchSeatsInTheatre(temp).then((response) => {
               
-        
+        console.log(response.data)
       setSeats({ ...seats, occupied: response.data.occupiedSeats });
       
     }).catch(err => console.log(err))
@@ -125,7 +124,6 @@ export default function BookingPage() {
 
 
   // fetch only those theatres that is currently running this movie
-
    let getTheatres = () => {
      getAllTheatresCall()
        .then((response) => {
@@ -245,8 +243,8 @@ export default function BookingPage() {
                  
                 />
               </div>
-              <div>
-                <p className=" text-center fs-5 m-2">Select Tickets:</p>
+              <div className="d-flex flex-column align-items-center">
+                <p className=" fs-5 m-2">Select Tickets:</p>
                 <div className="cinema mt-3">
                   {cinema.map((seat, i) => (
                     <button

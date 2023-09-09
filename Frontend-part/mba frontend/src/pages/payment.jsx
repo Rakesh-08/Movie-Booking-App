@@ -14,7 +14,12 @@ export default function PaymentPage() {
     let NavigateTo = useNavigate();
   let booking = useSelector(state => state.moviesList.bookingInfo);
 
- 
+  useEffect(() => {
+        
+    if (!localStorage.getItem("mba_token")) {
+       NavigateTo("/login")
+    }
+ },[])
 
   let totalPrice = booking.pricePerTicket * booking.totalTickets + booking.theatreCharges - booking.discount;
 

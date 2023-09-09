@@ -156,13 +156,13 @@ export default function AuthComponent() {
               />
               <label>UserId</label>
             </div>
-            <div className="d-flex m-1">
-              <div className="form-floating w-100  text-dark ">
+            <div className="position-relative m-1">
+              <div className="form-floating   text-dark ">
                 <input
                   required
                   id="floatingPassword"
                   type={togglePassword}
-                  className="form-control  "
+                  className="form-control authInput "
                   placeholder="password"
                   value={authInfo.password}
                   onChange={(e) =>
@@ -171,14 +171,11 @@ export default function AuthComponent() {
                 />{" "}
                 <label>Password</label>
               </div>
-              <div>
-                <input
-                  onClick={setPasswordVisibility}
-                  style={{ height: "2em" }}
-                  className=" m-2 "
-                  type="checkbox"
-                />
-              </div>
+              <input
+                className="position-absolute my-3 end-0 top-0"
+                onClick={setPasswordVisibility}
+                type="checkbox"
+              />
             </div>
 
             <div>
