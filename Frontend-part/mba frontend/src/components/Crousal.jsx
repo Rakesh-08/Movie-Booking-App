@@ -12,7 +12,7 @@ function MoviesCrousal() {
             height: "70vh",
           }}
           className="d-block  slidingwindow "
-          src="https://pbs.twimg.com/media/FyLhdtdWIAIgHAy.jpg:large"
+          src="https://rukminim1.flixcart.com/image/850/1000/jn3hocw0/poster/g/x/h/medium-hollywood-movie-wall-poster-pirates-of-the-caribbean-dead-original-imaf9utzqnengk9c.jpeg?q=90"
         />
       </Carousel.Item>
       <Carousel.Item>
