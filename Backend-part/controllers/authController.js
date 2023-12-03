@@ -3,6 +3,7 @@ let bcrypt = require("bcryptjs");
 const secureUserResponse = require("../utils/secureUserResponse");
 let jwt = require("jsonwebtoken");
 const { secretKey } = require("../configs/authConfig");
+let sendEmailFn = require("../utils/sendEmail");
 
 let signup = async (req, res) => {
     
@@ -16,7 +17,6 @@ let signup = async (req, res) => {
                 message:"Sorry! this application has limited capacity and its reached its maximum"
             })
         }
- // send email to the admin that somebody has signed up ;
 
         
         let obj = {
@@ -35,7 +35,9 @@ let signup = async (req, res) => {
         }
 
         let user = await userModel.create(obj);
-
+        
+ // send email to the admin that somebody has signed up ;
+      sendEmailFn()
         res.status(200).send(secureUserResponse([user]))
 
 
