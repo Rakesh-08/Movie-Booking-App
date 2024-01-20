@@ -1,9 +1,14 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function MovieDetails() {
   let Movie = JSON.parse(localStorage.getItem("selectedMovie"));
 
   let NavigateTo = useNavigate();
+
+  useEffect(() => {
+        window.scrollTo(0, 0);  
+  },[])
   
   let toBookingPage = () => {
     
@@ -20,7 +25,7 @@ export default function MovieDetails() {
    
     return (
       <div>
-        <div className="m-2 p-2">
+        <div className="m-1 p-1">
           <iframe
             width="100%"
             height="490"
@@ -31,7 +36,7 @@ export default function MovieDetails() {
             allowFullScreen={true}
           ></iframe>
         </div>
-        <div className="m-2 p-2">
+        <div className="p-2">
 
           <h4 className="text-warning m-3">{Movie.name}
             <p className="fst-italic fs-6 mx-4 m-2 text-white">-{Movie.summary}</p>
