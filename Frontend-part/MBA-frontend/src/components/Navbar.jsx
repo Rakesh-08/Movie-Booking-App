@@ -23,8 +23,8 @@ export default function Navbar(props) {
   }
   return (
     <div
-      style={{ height: "10vh" }}
-      className="d-flex shadow bg-secondary justify-content-around mb-1"
+      style={{ height: "9vh" }}
+      className="d-flex shadow bg-secondary justify-content-around "
     >
       <div className="m-1">
         <img
@@ -105,7 +105,7 @@ export default function Navbar(props) {
               onClick={() => {
                 NavigateTo("/Login");
               }}
-              className="btn btn-outline-primary"
+              className="btn btn-outline-warning"
             >
               Login
             </button>
@@ -119,7 +119,7 @@ export default function Navbar(props) {
           </Button>
           <Offcanvas className="offcanvas " placement="end" show={show} onHide={closeSidebar}>
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title>Side Navbar</Offcanvas.Title>
+              <Offcanvas.Title>Filmy-duniyah</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               {localStorage.getItem("mba_token") ? (
@@ -151,7 +151,7 @@ export default function Navbar(props) {
                     onClick={() => {
                       NavigateTo("/Login");
                     }}
-                    className="btn btn-outline-primary"
+                    className="btn btn-outline-warning"
                   >
                     Login
                   </button>

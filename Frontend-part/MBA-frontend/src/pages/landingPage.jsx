@@ -67,7 +67,7 @@ export default function HomeComponent() {
         <MoviesCrousal />
 
         <div>
-          <div className="p-5 my-2">
+          <div className="m-2 p-1">
             {loading ? (
               <>
                 <h1 className="vh-100 d-flex align-items-center justify-content-center">
@@ -147,7 +147,7 @@ export default function HomeComponent() {
 let MovieListByLanguage = ({ heading, moviesList, dispatch, NavigateTo }) => {
      
   return (
-    <div className="my-4 ">
+    <div className="my-3 ">
       <h5 className="fs-4 lead ">{heading}</h5>
       <div className=" d-flex justify-content-end ">
          <button
@@ -167,7 +167,6 @@ let MovieListByLanguage = ({ heading, moviesList, dispatch, NavigateTo }) => {
       <div
         style={{
           display: "flex",
-          flexWrap: "wrap",
           justifyContent: "center",
         }}
       >

@@ -17,7 +17,7 @@ export default function MovieCard({MovieInfo}) {
           width: "20vw",
           height: "33vh",
         }}
-        className="card moviecard m-3  bg-secondary "
+        className="card moviecard m-2  bg-secondary "
       >
         <img
           src={MovieInfo.posterURL}

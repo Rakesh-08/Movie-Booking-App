@@ -4,7 +4,7 @@ import Carousel from "react-bootstrap/Carousel";
 
 function MoviesCrousal() {
   return (
-    <Carousel   style={{ boxShadow: "0em 2em 3em grey " }}>
+    <Carousel   style={{ boxShadow: "0em 0.3em 1em grey " }}>
       <Carousel.Item>
         <img
           style={{
