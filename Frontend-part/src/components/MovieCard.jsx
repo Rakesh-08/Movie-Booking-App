@@ -34,7 +34,7 @@ export default function MovieCard({MovieInfo}) {
             {Array(Math.floor(MovieInfo.imdbRating.slice(0, 1) / 2))
               .fill()
               .map((i, index) => (
-                <span className=" text-warning fs-4 m-1 cardFont" key={index}>
+                <span className=" text-warning fs-4 cardFont" key={index}>
                   ★
                 </span>
               ))}

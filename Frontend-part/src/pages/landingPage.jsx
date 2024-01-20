@@ -66,7 +66,7 @@ export default function HomeComponent() {
         />
         <MoviesCrousal />
 
-        <div>
+        <div className="my-4">
           <div className="m-2 p-1">
             {loading ? (
               <>
