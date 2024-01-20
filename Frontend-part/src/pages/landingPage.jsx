@@ -119,12 +119,12 @@ export default function HomeComponent() {
           </div>
         </div>
 
-        <div className="m-4 ">
-          <p className="mx-3">Upcoming Movie Trailers </p>
+        <div>
+          <p className="mx-3 fst-italic text-info">Upcoming Movie Trailers </p>
           
-          <div className="d-flex align-items-center justify-content-center flex-wrap p-3  ">
+          <div className="d-flex align-items-center justify-content-center flex-wrap p-2  ">
           {trailers.map((url,i) => 
-            <div key={i} className=" m-2 hovereffect ">
+            <div key={i} className=" m-1 hovereffect ">
               <iframe
                 width="100%"
                 height="200"

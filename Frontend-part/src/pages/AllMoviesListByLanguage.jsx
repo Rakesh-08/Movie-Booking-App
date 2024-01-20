@@ -10,14 +10,13 @@ export default function AllMoviesListByLang() {
     let NavigateTo = useNavigate();
     
     return (
-      <div className="m-2">
-        <button onClick={()=>NavigateTo("/")} className="m-3 btn btn border-0 text-white">⬅ Back</button>
+      <div>
+        <button onClick={()=>NavigateTo("/")} className="m-2 btn btn border-0 text-white">⬅ Back</button>
 
         <div
           style={{
             display: "flex",
-                    flexWrap: "wrap",
-            marginLeft: "5%",
+           flexWrap: "wrap",
             justifyContent: "center"
           }}
         >
